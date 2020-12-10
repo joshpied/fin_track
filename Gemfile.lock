@@ -79,6 +79,10 @@ GEM
       rails (>= 3.1)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     email_validator (1.6.0)
       activemodel
     erubi (1.10.0)
@@ -209,6 +213,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   clearance
+  dotenv-rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
