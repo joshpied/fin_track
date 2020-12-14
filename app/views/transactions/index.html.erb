@@ -1,10 +1,13 @@
 <%# <div class="container mx-auto px-4"> %>
 <div class="md:container md:mx-auto my-6">
   <h1 class="text-5xl text-center my-6">Transactions</h1>
+
+  <%= link_to "Add Transaction", new_transaction_path, class: "" %>
   
   <ul class="transactions flex flex-col justify-center space-y-6">
     <% @transactions.each do |transaction| %>
       <li class="transaction flex flex-row justify-evenly items-center p-5 border">
+        <%# <%= link_to "Edit", transaction_path(transaction) %>
 
         <div class="transaction-category flex-1">
           <span class="bg-blue-300 rounded-full py-3 px-6">
@@ -13,7 +16,7 @@
         </div>
 
         <div class="transaction-note flex-1">
-          <%= transaction.note %>
+          <%= truncate(transaction.note, length: 150) %>
         </div>
 
         <div class="transaction-amount flex-1">
