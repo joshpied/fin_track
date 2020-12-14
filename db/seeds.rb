@@ -5,3 +5,44 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+exit if !Rails.env.development?
+
+puts "Deleting the Data"
+User.delete_all
+TransactionCategory.delete_all
+Transaction.delete_all
+
+puts "Creating User"
+user = User.create(email: "test@test.com", password: "testers")
+
+puts "Creating Transaction Categories"
+category_list = [
+  "Travel",
+  "Education",
+  "Transport",
+  "Home",
+  "Sports/Fitness",
+  "Hobbies",
+  "Haircut/Beauty",
+  "Car",
+  "Gifts",
+  "Shopping",
+  "Personal",
+  "Work",
+  "Entertainment",
+  "Groceries",
+  "Food and Drink",
+  "Bills and Fees",
+  "Healthcare",
+  "Other"
+]
+
+category_list.each do |category|
+  TransactionCategory.create( name: category )
+end
+
+puts "Creating Transactions"
+transaction1 = Transaction.create(note: "plane ticket", amount: 674.37 , transaction_category_id: 1, user: user)
+transaction2 = Transaction.create(note: "bought calculator", amount: 26.50 , transaction_category_id: 2, user: user)
+transaction3 = Transaction.create(note: "bus ticket", amount: 3.60 , transaction_category_id: 3, user: user)
