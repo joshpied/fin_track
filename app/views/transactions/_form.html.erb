@@ -32,6 +32,8 @@
       %>
     </div>
 
+    <%= form.hidden_field :transaction_date, value: Time.now %>
+
     <div class="form-group">
       <%= form.label :note %>
       <%= form.text_area :note, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" %>

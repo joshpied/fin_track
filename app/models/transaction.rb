@@ -3,7 +3,7 @@ class Transaction < ApplicationRecord
   belongs_to :transaction_category
 
   def date_formatted
-    created_at.strftime("%d %b %Y")
+    transaction_date.strftime("%d %b %Y")
   end
   
 end

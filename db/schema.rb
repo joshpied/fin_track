@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_12_10_232258) do
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "note"
     t.decimal "amount", precision: 13, scale: 2, null: false
+    t.datetime "transaction_date", null: false
     t.bigint "user_id", null: false
     t.bigint "transaction_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
