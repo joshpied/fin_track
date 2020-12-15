@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
     @transactions = current_user.transactions.joins(:transaction_category).order(created_at: :desc) # also need to add where clause for current month
     # @transactions = current_user.transactions.joins("INNER JOIN transaction_categories ON transaction_categories.id = transactions.transaction_category_id").order(:id)
     # puts @transactions.to_json
+    @current_month = Time.new.strftime("%B")
   end
 
   def show
@@ -18,12 +19,39 @@ class TransactionsController < ApplicationController
   def create
     @transaction = current_user.transactions.build(transaction_params)
     if @transaction.save
-      redirect_to transaction_path(@transaction), notice: "transaction Created!"
+      redirect_to transaction_path(@transaction), notice: "Transaction Created!"
     else
       @errors = @transaction.errors.full_messages
       render :new
     end
   end
+
+  def edit
+    @transaction = current_user.transactions.find(params[:id])
+  end
+
+  def update
+    @transaction = current_user.transactions.find(params[:id])
+
+    if @transaction.update_attributes(transaction_params)
+      redirect_to transaction_path(@transaction), notice: "Transaction Updated!"
+    else
+      @errors = @transaction.errors.full_messages
+      render :edit
+    end
+  end
+
+  def destroy
+    @transaction = current_user.transactions.find(params[:id])
+    if @transaction.destroy
+      flash[:success] = 'Transaction was successfully deleted.'
+      redirect_to transactions_url
+    else
+      flash[:error] = 'Something went wrong'
+      redirect_to transactions_url
+    end
+  end
+  
 
 
   private 

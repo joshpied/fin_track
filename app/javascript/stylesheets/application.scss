@@ -3,8 +3,27 @@
 
 /* Add any custom CSS here */
 @layer components {
+  .container-narrow {
+    @apply xl:mx-96 lg:mx-56 md:mx-36 sm:mx-12 m-3 my-6;
+  }
+
   .btn {
-    @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
+    @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-center text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
+  }
+
+  .flash {
+    &.success {
+      @apply text-center bg-green-400 text-white;
+    }
+    &.notice {
+      @apply text-center bg-blue-400 text-white;
+    }
+    &.alert {
+      @apply text-center bg-yellow-400 text-white;
+    }
+    &.error {
+      @apply text-center bg-red-400 text-white;
+    }
   }
 }
 @import "tailwindcss/utilities";

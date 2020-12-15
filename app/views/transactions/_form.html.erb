@@ -10,7 +10,7 @@
         </div>
         <%= form.number_field :amount, 
             placeholder: "0.00",
-            value: number_to_currency(form.object.amount.to_f, delimiter: '', unit: '$'), 
+            # value: number_to_currency(form.object.amount.to_f, delimiter: '', unit: ''),
             step: :any,
             min: 0,
             class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"  

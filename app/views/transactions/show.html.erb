@@ -1,7 +1,8 @@
-<div class="container">
+<div class="container-narrow">
   <h1><%= @transaction.transaction_category.name %> on <%= @transaction.date_formatted %></h1>
   
   <p><%= @transaction.note %></p>
+  <p><%= number_to_currency(@transaction.amount) %></p>
 
   <div class="btn-group" role="group">
     <%= link_to "Back", transactions_path, class: "btn btn-secondary" %>
