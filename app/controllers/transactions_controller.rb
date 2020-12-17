@@ -17,6 +17,8 @@ class TransactionsController < ApplicationController
   end
   
   def create
+    # TODO need to check if report for this month exists yet and create it if not
+    # add the Report to the new Transaction
     @transaction = current_user.transactions.build(transaction_params)
     if @transaction.save
       redirect_to transaction_path(@transaction), notice: "Transaction Created!"
