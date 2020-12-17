@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 
   def index
     @current_month = Time.new.strftime("%B")
-    @transactions = current_user.transactions.joins(:transaction_category).order(transaction_date: :desc) # also need to add where clause for current month
+    @transactions = current_user.transactions.joins(:transaction_category).order("transaction_date desc, id desc") # also need to add where clause for current month
     # @transactions = current_user.transactions.joins("INNER JOIN transaction_categories ON transaction_categories.id = transactions.transaction_category_id").order(:id)
     # puts @transactions.to_json
   end
@@ -55,7 +55,6 @@ class TransactionsController < ApplicationController
 
 
   private 
-
   def transaction_params
     params.require(:transaction).permit(:amount, :note, :transaction_date, :transaction_category_id)
   end
