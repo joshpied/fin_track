@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  # get 'home/index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "home#index"
+  # root to: "home#index"
+
+  # Signed in home -> Transactions
+  constraints Clearance::Constraints::SignedIn.new do
+    root to: "transactions#index", as: :signed_in_root
+  end
+
+  # Signed out home -> Home
+  constraints Clearance::Constraints::SignedOut.new do
+    root to: "home#index"
+  end
 
   resources :transactions
 end
