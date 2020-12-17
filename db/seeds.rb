@@ -17,6 +17,7 @@ puts "Creating User"
 user = User.create(email: "test@test.com", password: "testers")
 
 puts "Creating Transaction Categories"
+# todo: add a color (https://tailwindcss.com/docs/customizing-colors) and icon to each category
 category_list = [
   "Travel",
   "Education",
