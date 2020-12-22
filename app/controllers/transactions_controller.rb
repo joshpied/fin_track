@@ -1,11 +1,16 @@
 class TransactionsController < ApplicationController
   before_action :require_login 
+  @@current_month = Time.now.month
+  @@current_year = Time.now.year
 
   def index
-    @current_month = Time.new.strftime("%B")
-    @transactions = current_user.transactions.joins(:transaction_category).order("transaction_date desc, id desc") # also need to add where clause for current month
-    # @transactions = current_user.transactions.joins("INNER JOIN transaction_categories ON transaction_categories.id = transactions.transaction_category_id").order(:id)
-    # puts @transactions.to_json
+    @current_month_name = Time.new.strftime("%B")
+    @transactions = 
+      current_user
+      .transactions
+      .joins(:transaction_category)
+      .order("transaction_date desc, id desc")
+      .where("MONTH(transaction_date) = ? AND YEAR(transaction_date) = ?", @@current_month, @@current_year)
   end
 
   def show
@@ -16,13 +21,13 @@ class TransactionsController < ApplicationController
     @transaction = current_user.transactions.build
   end
   
+  ##
+  # Creates a new transaction and creates/updates a report if it is the first transaction of the month
   def create
-    current_month = Time.now.month
-    current_year = Time.now.year
-    # need to check if report for this month exists yet and create it if not
+    # need to check if report for this month/year exists yet and create it if not
     report = current_user
             .reports
-            .find_or_create_by(:month => current_month, :year => current_year) do |report|
+            .find_or_create_by(:month => @@current_month, :year => @@current_year) do |report|
               total_amount = 0.00
               report_date = transaction_params[:transaction_date]
             end
@@ -74,5 +79,10 @@ class TransactionsController < ApplicationController
   def transaction_params
     params.require(:transaction).permit(:amount, :note, :transaction_date, :transaction_category_id, :report_id)
   end
+
+  # helper_method :current_month
+  # def current_month
+  #   @@current_month
+  # end
   
 end

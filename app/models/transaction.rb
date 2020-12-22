@@ -4,6 +4,7 @@ class Transaction < ApplicationRecord
   belongs_to :report
   after_save :update_report_amount
 
+  # increase the transaction's report total amount for the month
   def update_report_amount
     report = Report.find(self.report_id)
     report.update_column(:total_amount, report.total_amount + self.amount)
