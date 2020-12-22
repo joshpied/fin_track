@@ -7,6 +7,14 @@
     @apply xl:mx-96 lg:mx-56 md:mx-36 sm:mx-12 m-3 my-6;
   }
 
+  .container-large {
+    @apply max-w-full mx-auto xl:py-8 xl:px-24 sm:py-8 sm:px-6 px-4;
+  }
+
+  .container-regular {
+    @apply max-w-7xl mx-auto px-4 sm:px-6;
+  }
+
   .btn {
     @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-center text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
   }

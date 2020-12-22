@@ -1,0 +1,6 @@
+<span 
+  class="text-sm text-white rounded-full py-2 px-4 mr-2"
+  style="background: <%= transaction_category_color(category_name) %>">
+    <i class="fas fa-<%= transaction_category_icon(category_name) %>"></i>
+    <%= category_name %>
+</span>
