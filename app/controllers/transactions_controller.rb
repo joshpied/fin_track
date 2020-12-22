@@ -17,9 +17,25 @@ class TransactionsController < ApplicationController
   end
   
   def create
-    # TODO need to check if report for this month exists yet and create it if not
-    # add the Report to the new Transaction
-    @transaction = current_user.transactions.build(transaction_params)
+    current_month = Time.now.month
+    current_year = Time.now.year
+    # need to check if report for this month exists yet and create it if not
+    report = current_user
+            .reports
+            .find_or_create_by(:month => current_month, :year => current_year) do |report|
+              total_amount = 0.00
+              report_date = transaction_params[:transaction_date]
+            end
+    
+    # can now add a transaction
+    @transaction = current_user.transactions.new(
+      note: transaction_params[:note], 
+      amount: transaction_params[:amount], 
+      transaction_date: transaction_params[:transaction_date],
+      transaction_category_id: transaction_params[:transaction_category_id],
+      report_id: report.id
+    )
+
     if @transaction.save
       redirect_to transaction_path(@transaction), notice: "Transaction Created!"
     else
@@ -54,11 +70,9 @@ class TransactionsController < ApplicationController
     end
   end
   
-
-
   private 
   def transaction_params
-    params.require(:transaction).permit(:amount, :note, :transaction_date, :transaction_category_id)
+    params.require(:transaction).permit(:amount, :note, :transaction_date, :transaction_category_id, :report_id)
   end
   
 end

@@ -18,9 +18,9 @@ user = User.create(email: "test@test.com", password: "testers")
 
 puts "Creating Reports"
 #november
-report1 = Report.create(total_amount: 22003.55, report_date: "2020-11-01 00:00:00", month: 11, year: 2020, user_id: user.id)
+report1 = Report.create(total_amount: 0.00, report_date: "2020-11-01 00:00:00", month: 11, year: 2020, user_id: user.id)
 #december
-report2 = Report.create(total_amount: 722.81, report_date: "2020-12-11 00:00:00", month: 12, year: 2020, user_id: user.id)
+report2 = Report.create(total_amount: 0.00, report_date: "2020-12-11 00:00:00", month: 12, year: 2020, user_id: user.id)
 
 puts "Creating Transaction Categories"
 category_list = [
