@@ -17,6 +17,8 @@ puts "Creating User"
 user = User.create(email: "test@test.com", password: "testers")
 
 puts "Creating Reports"
+# setting reports to $0 because after_create, after_update, and after_destroy methods 
+# in transaction.rb model will take care of incrementing/decrementing report amounts
 #november
 report1 = Report.create(total_amount: 0.00, report_date: "2020-11-01 00:00:00", month: 11, year: 2020, user_id: user.id)
 #december

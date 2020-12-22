@@ -13,26 +13,7 @@
           <%= number_to_currency(@recent_report.total_amount) %>
         </span>
       </h2>
-      <table class="table-fixed border-separate border rounded-md border-indigo-200 p-3 w-full md:w-auto">
-        <thead>
-          <tr>
-            <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Category</th>
-            <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Spent</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @transaction_categories.each do |category, amount|  %>
-            <tr class="">
-              <td class="py-5 px-3">
-                <%= render partial: 'shared/category_badge', :locals => {:category_name => category} %>
-              </td>
-              <td class="py-5 px-3">
-                <%= number_to_currency(amount) %>
-              </td>
-            </tr>
-          <% end %> 
-        </tbody>
-      </table>
+      <%= render partial: 'shared/category_spending_table', :locals => {:categories => @transaction_categories} %>
     </div>
     <div class="reports-list flex flex-col space-y-5 mt-7">
       <h2 class="text-2xl text-indigo-600">Previous Reports</h2>

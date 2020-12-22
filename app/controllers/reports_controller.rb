@@ -23,6 +23,9 @@ class ReportsController < ApplicationController
       .includes(:transaction_category)
       .group("transaction_categories.name")
       .sum(:amount)
+      .sort_by { |category, amount| amount }
+      .reverse
+      
   end
 
   def show
