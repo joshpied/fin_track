@@ -9,16 +9,22 @@
     <% end%>
   </div>
 
-  <%= @fuckya %>
+  <%= %>
+
+  
+  <% if @transactions %>
+    
+  <% end %>
+  
 
 
   <ul class="transactions flex flex-col justify-center space-y-6">
-    <% @transactions.each do |transaction| %>
+    <% if @transactions.each do |transaction| %>
       <%= link_to transaction_path(transaction) do %>
-        <li class="transaction flex flex-row justify-evenly items-center border rounded-xl p-5 border-indigo-200 hover:border-indigo-500">
+        <li class="transaction flex flex-row justify-evenly items-center border-2 rounded-xl p-5 border-indigo-200 hover:border-indigo-500">
           <div class="transaction-category-note flex-1">
             <%= render partial: 'shared/category_badge', :locals => {:category_name => transaction.transaction_category.name} %>
-            <%= truncate(transaction.note, length: 16) %>
+            <span class="ml-2"><%= truncate(transaction.note, length: 16) %></span>
           </div>
 
           <div class="transaction-amount mr-6">
@@ -30,6 +36,9 @@
           </div>
         </li>
       <% end %>
+    <% end.empty? %>
+      <h2 class="text-center text-2xl text-gray-600">No transactions this month!</h2>
     <% end %>
+      
   </ul>
 </div>

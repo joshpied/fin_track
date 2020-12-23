@@ -6,6 +6,7 @@
 
   <div class="btn-group" role="group">
     <%= link_to "Back", transactions_path, class: "btn btn-secondary" %>
+    <%# <%= link_to 'Back', "javascript:history.back()", class: "btn btn-secondary" %>
     <%= link_to "Edit", edit_transaction_path(@transaction), class: "btn btn-info" %>
     <%= link_to "Delete", transaction_path(@transaction), data: {
       confirm: "Are you sure you want to remove this transaction?",

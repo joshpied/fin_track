@@ -1,6 +1,49 @@
-<h1><%= @report %></h1>
-<%= @report.to_json %>
-<br><br>
-<%= @transactions.to_json %>
-<br><br>
-<%= @transaction_categories.to_json %>
+<div class="container-regular mt-6 mb-6">
+  <header class="bg-indigo-500 text-white shadow-lg rounded-2xl p-8">
+    <h1 class="text-4xl flex flex-wrap flex-col justify-between">
+      <%= @report %></span>
+      <span class="text-2xl block">
+        Report
+      </span>
+    </h1>
+  </header>
+  <main class="grid grid-cols-1 md:grid-cols-2">
+    <div class="report flex flex-col space-y-5 mt-7">
+      <h2 class="text-2xl text-gray-700">
+        Total Spending: 
+        <span class="text-indigo-600">
+          <%= number_to_currency(@report.total_amount) %>
+        </span>
+      </h2>
+      <%= render partial: 'shared/category_spending_table', :locals => {:categories => @transaction_categories} %>
+    </div>
+    <div class="transactions-list flex flex-col space-y-5 mt-7">
+      <h2 class="text-2xl text-indigo-600">Transactions in <%= @report.month_name %></h2>
+      <ul class="transactions flex flex-col justify-between space-y-6">
+        <% @transactions.each do |transaction| %>
+          <%= link_to transaction_path(transaction) do %>
+          <%# flex flex-row justify-evenly items-center %>
+            <li class="transaction grid grid-cols-3 md:grid-cols-4 gap-2 border-2 rounded-xl p-5 border-indigo-200 hover:border-indigo-500">
+              <div class="transaction-category">
+                <%= render partial: 'shared/category_badge', :locals => {:category_name => transaction.transaction_category.name} %>
+                <%# <%= truncate(transaction.note, length: 16) %>
+              </div>
+
+              <div class="transaction-note text-sm text-gray-600 truncate hidden md:inline">
+                <%= transaction.note %>
+              </div>
+
+              <div class="transaction-amount">
+                -<%= number_to_currency(transaction.amount) %>
+              </div>
+
+              <div class="transaction-date">
+                <%= transaction.date_formatted %>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </main>
+</div>

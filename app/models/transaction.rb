@@ -29,7 +29,7 @@ class Transaction < ApplicationRecord
 
   # Formats transaction date like "25 Dec 2020"
   def date_formatted
-    transaction_date.strftime("%d %b %Y")
+    transaction_date.strftime("%e %b %Y")
   end
   
 end

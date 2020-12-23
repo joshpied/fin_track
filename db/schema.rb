@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2020_12_10_232258) do
 
   create_table "reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.decimal "total_amount", precision: 13, scale: 2, null: false
-    t.datetime "report_date", null: false
+    t.decimal "total_amount", precision: 13, scale: 2, default: "0.0", null: false
+    t.datetime "report_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "month"
     t.integer "year"
     t.bigint "user_id", null: false

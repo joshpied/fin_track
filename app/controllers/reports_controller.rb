@@ -30,14 +30,20 @@ class ReportsController < ApplicationController
 
   def show
     report_id = params[:id]
-    @report = current_user.reports.find(report_id)
-    @transactions = current_user.transactions.where("report_id = ?", report_id)
+    @report = 
+      current_user.reports
+      .find(report_id)
+    @transactions = 
+      current_user.transactions
+      .where("report_id = ?", report_id)
     @transaction_categories = 
       current_user.transactions
       .where("report_id = ?", report_id)
       .includes(:transaction_category)
       .group("transaction_categories.name")
       .sum(:amount)
+      .sort_by { |category, amount| amount }
+      .reverse
   end
   
   

@@ -1,8 +1,8 @@
 class CreateTransactions < ActiveRecord::Migration[6.0]
   def change
     create_table :reports do |t|
-      t.decimal :total_amount, null: false, precision: 13, scale: 2
-      t.datetime :report_date, null: false
+      t.decimal :total_amount, null: false, precision: 13, scale: 2, default: 0.00
+      t.datetime :report_date, null: false, default: -> { 'CURRENT_TIMESTAMP' }
       t.integer :month # make validation in report model like: validates :rating, :inclusion => { :in => 0..100 } https://stackoverflow.com/questions/27370251/activerecord-adding-rating-range-in-migration-file
       t.integer :year
       
