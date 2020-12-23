@@ -7,7 +7,7 @@
       </span>
     </h1>
   </header>
-  <main class="grid grid-cols-1 md:grid-cols-2">
+  <main class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     <div class="report flex flex-col space-y-5 mt-7">
       <h2 class="text-2xl text-gray-700">
         Total Spending: 
@@ -22,15 +22,9 @@
       <ul class="transactions flex flex-col justify-between space-y-6">
         <% @transactions.each do |transaction| %>
           <%= link_to transaction_path(transaction) do %>
-          <%# flex flex-row justify-evenly items-center %>
-            <li class="transaction grid grid-cols-3 md:grid-cols-4 gap-2 border-2 rounded-xl p-5 border-indigo-200 hover:border-indigo-500">
+            <li class="transaction grid grid-cols-3 md:grid-cols-4 items-center gap-2 border-2 rounded-xl p-5 border-indigo-200 hover:border-indigo-500">
               <div class="transaction-category">
                 <%= render partial: 'shared/category_badge', :locals => {:category_name => transaction.transaction_category.name} %>
-                <%# <%= truncate(transaction.note, length: 16) %>
-              </div>
-
-              <div class="transaction-note text-sm text-gray-600 truncate hidden md:inline">
-                <%= transaction.note %>
               </div>
 
               <div class="transaction-amount">
@@ -39,6 +33,10 @@
 
               <div class="transaction-date">
                 <%= transaction.date_formatted %>
+              </div>
+
+              <div class="transaction-note text-sm text-gray-600 truncate col-span-4 md:col-span-1">
+                <%= transaction.note %>
               </div>
             </li>
           <% end %>

@@ -1,10 +1,24 @@
-<div class="container-narrow">
-  <h1><%= @transaction.transaction_category.name %> on <%= @transaction.date_formatted %></h1>
-  
-  <p><%= @transaction.note %></p>
-  <p><%= number_to_currency(@transaction.amount) %></p>
+<main 
+  style="
+    background: <%= transaction_category_color(@transaction.transaction_category.name) %>1A; 
+    border: 1px solid <%= transaction_category_color(@transaction.transaction_category.name) %>;"
+  class="container-narrow py-12 px-10 mt-24 grid grid-cols-1 gap-4 justify-items-center border-2 rounded-xl">
 
-  <div class="btn-group" role="group">
+  <p style="color: <%= transaction_category_color(@transaction.transaction_category.name) %>" class="transaction-amount text-4xl"><%= number_to_currency(@transaction.amount) %></p>
+
+  <p class="transaction-category-date text-2xl flex">
+    <span class="" style="color: <%= transaction_category_color(@transaction.transaction_category.name) %>">
+      <i class="fas fa-<%= transaction_category_icon(@transaction.transaction_category.name) %>"></i>
+      <%= @transaction.transaction_category.name %>
+    </span>&nbsp; on 
+    <%= @transaction.date_formatted %>
+  </p>
+  
+  <p class="transaction-note text-gray-600 text-lg"><%= @transaction.note %></p>
+  
+
+  <div class="btn-group mt-7" role="group">
+    <%# <i class="fas fa-angle-left"></i> %>
     <%= link_to "Back", transactions_path, class: "btn btn-secondary" %>
     <%# <%= link_to 'Back', "javascript:history.back()", class: "btn btn-secondary" %>
     <%= link_to "Edit", edit_transaction_path(@transaction), class: "btn btn-info" %>
@@ -12,4 +26,11 @@
       confirm: "Are you sure you want to remove this transaction?",
     }, method: :delete, class: "btn btn-danger" %>
   </div>
-</div>
+</main>
+
+<%# <div class="flex h-screen w-screen justify-center items-center">
+  <div class="text-center bg-blue-400"> <!-- ⬅️ THIS DIV WILL BE CENTERED -->
+      <h1 class="text-3xl">HEADING</h1>
+      <p class="text-xl">Sub text</p>
+  </div>
+</div> %>

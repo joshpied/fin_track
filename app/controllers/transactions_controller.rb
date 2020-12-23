@@ -28,8 +28,8 @@ class TransactionsController < ApplicationController
     report = current_user
             .reports
             .find_or_create_by(:month => @@current_month, :year => @@current_year) do |report|
-              total_amount = 0.00
-              report_date = transaction_params[:transaction_date]
+              report.total_amount = 0.00
+              report.report_date = transaction_params[:transaction_date]
             end
     
     # can now add a transaction
