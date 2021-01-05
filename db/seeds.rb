@@ -24,6 +24,12 @@ report1 = Report.create(total_amount: 0.00, report_date: "2020-11-01 00:00:00", 
 #december
 report2 = Report.create(total_amount: 0.00, report_date: "2020-12-11 00:00:00", month: 12, year: 2020, user_id: user.id)
 
+puts "Creating Budgets"
+# november budget
+budget1 = Budget.create(amount: 5500, active: true, report: report1, user: user)
+# december budget
+budget2 = Budget.create(amount: 7000, active: true, report: report2, user: user)
+
 puts "Creating Transaction Categories"
 category_list = [
   "Travel",

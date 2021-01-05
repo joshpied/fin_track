@@ -12,6 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2020_12_10_232258) do
 
+  create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.decimal "amount", precision: 13, scale: 2, null: false
+    t.boolean "active"
+    t.bigint "user_id", null: false
+    t.bigint "report_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["report_id"], name: "index_budgets_on_report_id"
+    t.index ["user_id"], name: "index_budgets_on_user_id"
+  end
+
   create_table "reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.decimal "total_amount", precision: 13, scale: 2, default: "0.0", null: false
     t.datetime "report_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
@@ -55,6 +66,8 @@ ActiveRecord::Schema.define(version: 2020_12_10_232258) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "budgets", "reports"
+  add_foreign_key "budgets", "users"
   add_foreign_key "reports", "users"
   add_foreign_key "transactions", "reports"
   add_foreign_key "transactions", "transaction_categories"

@@ -24,7 +24,7 @@ module ApplicationHelper
       "Gifts" => "#06B6D4",
       "Shopping" => "#14B8A6",
       "Personal" => "#10B981",
-      "Work" => "#EAB308",
+      "Work" => "#F59E0B",
       "Entertainment" => "#8B5CF6",
       "Groceries" => "#EAB308",
       "Food and Drink" => "#F97316",

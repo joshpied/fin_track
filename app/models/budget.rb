@@ -1,6 +1,6 @@
-class Report < ApplicationRecord
-  has_many :transactions
-  has_one :budget
+class Budget < ApplicationRecord
+  belongs_to :report
+  belongs_to :user
 
   def month_name
     report_date.strftime("%B")
