@@ -6,25 +6,31 @@ class ReportsController < ApplicationController
     current_year = Time.now.year
     # most recent report object
     @recent_report = 
-      current_user.reports
+      current_user
+      .reports
       .where("month = ? AND year = ?", current_month, current_year)
       .first 
-    # reports array (excluding recent report)
-    @reports = 
-      current_user.reports
-      .where
-      .not(id: @recent_report.id)
-      .order("report_date desc") 
-      # .pluck(:id, :report_date)
-    # hash of transaction_category.name => transaction.amount spent this month
-    @transaction_categories = 
-      current_user.transactions
-      .where("report_id = ?", @recent_report.id)
-      .includes(:transaction_category)
-      .group("transaction_categories.name")
-      .sum(:amount)
-      .sort_by { |category, amount| amount }
-      .reverse
+    # if @recent_report
+      # reports array (excluding recent report)
+      @reports = 
+        current_user
+        .reports
+        .where
+        .not("month = ? AND year = ?", current_month, current_year)
+        .order("report_date desc")
+        # .pluck(:id, :report_date)
+        
+      # hash of transaction_category.name => transaction.amount spent this month
+      @transaction_categories = 
+        current_user
+        .transactions
+        .where('extract(year from transaction_date) = ?', current_year)
+        .includes(:transaction_category)
+        .group("transaction_categories.name")
+        .sum(:amount)
+        .sort_by { |category, amount| amount }
+        .reverse
+    # end
       
   end
 

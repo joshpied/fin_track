@@ -2,6 +2,7 @@ class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :transaction_category
   belongs_to :report
+  
   after_create :increase_report_amount
   after_update :update_report_amount
   after_destroy :decrease_report_amount

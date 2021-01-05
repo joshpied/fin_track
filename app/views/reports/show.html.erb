@@ -1,4 +1,9 @@
 <div class="container-regular mt-6 mb-6">
+ 
+  <%= link_to reports_path, class: "link text-2xl flex items-center mb-6" do %>
+    <i class="fas fa-angle-left mr-1"></i> Reports
+  <% end %>
+ 
   <header class="bg-indigo-500 text-white shadow-lg rounded-2xl p-8">
     <h1 class="text-4xl flex flex-wrap flex-col justify-between">
       <%= @report %></span>
@@ -7,6 +12,7 @@
       </span>
     </h1>
   </header>
+  
   <main class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     <div class="report flex flex-col space-y-5 mt-7">
       <h2 class="text-2xl text-gray-700">
