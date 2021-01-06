@@ -2,6 +2,7 @@ class Budget < ApplicationRecord
   belongs_to :report
   belongs_to :user
 
+  # Month number to name eg. 1 -> January
   def month_name
     report_date.strftime("%B")
   end

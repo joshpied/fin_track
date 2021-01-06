@@ -1,47 +1,61 @@
 <div class="container-regular mt-6 mb-6">
-  <%# <% if @recent_report %>
     <header class="bg-indigo-500 text-white shadow-lg rounded-2xl p-8">
       <h1 class="text-4xl flex flex-wrap md:flex-row flex-col justify-between">
         Year to Date Report
-        <span class="md:ml-4 text-3xl block md:text-4xl"><%= Time.now.year %></span> 
+        <span class="md:ml-4 text-3xl block md:text-4xl"><%= @current_year %></span> 
       </h1>
     </header>
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <% if @recent_report %>
-        <div class="recent-report flex flex-col space-y-5 mt-7">
-          <h2 class="text-2xl text-gray-700">
-            Total Spending: 
-            <span class="text-indigo-600">
-              <%= number_to_currency(@recent_report.total_amount) %>
-            </span>
-          </h2>
+    <main class="grid grid-cols-1 md:grid-cols-2 gap-9">
+      <div class="recent-report flex flex-col space-y-5 mt-7">
+        <h2 class="text-2xl text-gray-700">
+          Total Spending in <%= @current_year %>: 
+          <span class="text-indigo-600">
+            <%= number_to_currency(@total_spent_year) %>
+          </span>
+        </h2>
+        <% if @transaction_categories %>
           <%= render partial: 'shared/category_spending_table', :locals => {:categories => @transaction_categories} %>
-        </div>
-      <% else %>
-        <div class="text-center">
-          <h1 class="text-2xl">No Recent Reports yet!</h1>
-          <h2 class="text-xl">Start by adding transactions.</h2>
-        </div>
-      <% end %>
+        <% else %>
+          <div class="text-center">
+            <h1 class="text-2xl">No Spending yet!</h1>
+            <h2 class="text-xl">Start by adding transactions.</h2>
+          </div>
+        <% end %>
+      </div>
+      
+      
       <div class="reports-list flex flex-col space-y-5 mt-7">
         <h2 class="text-2xl text-indigo-600">Current Monthly Report</h2>
-        <ul class="space-y-3">
-          <li class="">
-            <%= link_to report_path(@recent_report), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
-              <%= @recent_report %>
-            <% end %>
-          </li> 
-        </ul>
-        <h2 class="text-2xl text-indigo-600">Previous Monthly Reports</h2>
-        <ul class="space-y-3">
-          <% @reports.each do |report|  %>
+        <% if @recent_report %>
+          <ul>
             <li class="">
-              <%= link_to report_path(report), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
-                <%= report %>
+              <%= link_to report_path(@recent_report), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
+                <%= @recent_report %>
               <% end %>
-            </li>  
-          <% end %>
-        </ul>
+            </li> 
+          </ul>
+        <% else %>
+          <div class="text-center">
+            <h1 class="text-2xl">No Recent Report for this month yet!</h1>
+            <h2 class="text-xl">Start by adding transactions.</h2>
+          </div>
+        <% end %>
+        <h2 class="text-2xl text-indigo-600">Previous Monthly Reports</h2>
+        <% if @reports %>
+          <ul class="space-y-3">
+            <% @reports.each do |report|  %>
+              <li class="">
+                <%= link_to report_path(report), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
+                  <%= report %>
+                <% end %>
+              </li>  
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="text-center">
+            <h1 class="text-2xl">No reports for previous months found</h1>
+          </div>
+        <% end %>
       </div>
     </main>
   

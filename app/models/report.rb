@@ -2,6 +2,8 @@ class Report < ApplicationRecord
   has_many :transactions
   has_one :budget
 
+  # scope :with_budget, -> (report_id) { includes(:budget).where('budgets.id IS NOT NULL') }
+
   def month_name
     report_date.strftime("%B")
   end

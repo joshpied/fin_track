@@ -19,7 +19,11 @@
         Total Spending: 
         <span class="text-indigo-600">
           <%= number_to_currency(@report.total_amount) %>
-        </span>
+        </span> 
+        <% if @report&.budget %>
+          /
+          <span><%= @report.budget.amount %></span>
+        <% end %>
       </h2>
       <%= render partial: 'shared/category_spending_table', :locals => {:categories => @transaction_categories} %>
     </div>
