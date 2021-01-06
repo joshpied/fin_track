@@ -17,6 +17,7 @@ class ReportsController < ApplicationController
       .where
       .not("month = ? AND year = ?", @current_month, @current_year)
       .order("report_date desc")
+      .limit(6)
       # .pluck(:id, :report_date)
     
     @total_spent_year = current_user.reports.where("year = ?", @current_year).sum(:total_amount)
@@ -54,6 +55,14 @@ class ReportsController < ApplicationController
       .sum(:amount)
       .sort_by { |category, amount| amount }
       .reverse
+  end
+
+  def months
+    @reports = 
+      current_user
+      .reports
+      .order("report_date desc")
+    puts @reports
   end
   
   

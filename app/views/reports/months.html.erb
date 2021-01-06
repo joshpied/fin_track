@@ -1,0 +1,7 @@
+<h1>monthly report list here</h1>
+<p><%= @reports.to_json %></p>
+<% @reports.each do |report| %>
+  <h2>
+    <%= report %>
+  </h2>
+<% end %>
