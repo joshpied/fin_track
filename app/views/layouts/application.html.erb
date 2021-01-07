@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <%= render partial: "shared/header"%>
+    <%= render partial: "shared/header", :locals => {:recent_report_id => @recent_report_id}%>
     
     <div id="flash">
       <% flash.each do |key, value| %>

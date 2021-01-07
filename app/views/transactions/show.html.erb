@@ -18,8 +18,7 @@
   
 
   <div class="btn-group mt-7" role="group">
-    <%# <i class="fas fa-angle-left"></i> %>
-    <%= link_to "Back", transactions_path, class: "btn btn-secondary" %>
+    <%= link_to transactions_path, class: "btn btn-secondary" do %><i class="fas fa-angle-left"></i> Back<% end %>
     <%# <%= link_to 'Back', "javascript:history.back()", class: "btn btn-secondary" %>
     <%= link_to "Edit", edit_transaction_path(@transaction), class: "btn btn-info" %>
     <%= link_to "Delete", transaction_path(@transaction), data: {

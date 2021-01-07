@@ -42,10 +42,16 @@ class ReportsController < ApplicationController
       .left_outer_joins(:budget)
       .find(report_id)
       
+    @transactions_pagy,
     @transactions = 
-      current_user
-      .transactions
-      .where("report_id = ?", report_id)
+      pagy(
+        current_user
+        .transactions
+        .where("report_id = ?", report_id)
+        .order("transaction_date desc"),
+        items: 8
+      )
+
     @transaction_categories = 
       current_user
       .transactions
@@ -58,12 +64,7 @@ class ReportsController < ApplicationController
   end
 
   def months
-    @pagy, @reports = pagy(current_user.reports.left_outer_joins(:budget), items: 2)
-    # @reports = 
-    #   current_user
-    #   .reports
-    #   .order("report_date desc")
-    # puts @reports
+    @pagy, @reports = pagy(current_user.reports.left_outer_joins(:budget).order("report_date desc"), items: 12)
   end
   
   

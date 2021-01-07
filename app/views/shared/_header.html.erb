@@ -19,15 +19,14 @@
       </div>
       <% if signed_in? %>
         <nav class="hidden md:flex space-x-10">
-          <a href="/transactions" class="text-base font-medium text-gray-500 hover:text-gray-900">
-            Transactions
-          </a>
-          <a href="/reports" class="text-base font-medium text-gray-500 hover:text-gray-900">
-            Reports
-          </a>
-          <a href="/settings" class="text-base font-medium text-gray-500 hover:text-gray-900">
-            Settings
-          </a>
+          <%= link_to 'Transactions', transactions_path, class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
+          <% if recent_report_id %>
+            <%= link_to 'This Month', report_path(recent_report_id), class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
+          <% end %>
+          <%= link_to 'Reports', reports_path, class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
+          <%# <a href="/settings" class="text-base font-medium text-gray-500 hover:text-gray-900"> %>
+            <%# Settings %>
+          <%# </a> %>
         </nav>
       <% end %>
       
