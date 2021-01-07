@@ -1,27 +1,32 @@
 <div class="container-regular space-y-6">
-  <h1 class="text-center text-4xl mt-6">All Reports</h1>
+  <%= render partial: 'shared/page_header', :locals => {:title => "All Reports", :icon => "fas fa-clipboard-list mr-1", :subtitle => ""} %>
 
-  <%# <><%= @reports.to_json %>
   <table class="table-fixed border-separate border-2 rounded-md border-indigo-200 p-3 w-full">
     <thead>
-      <tr>
-        <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Report Date</th>
-        <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Total Spent</th>
-        <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Budget</th>
+      <tr class="text-indigo-500">
+        <th class="p-3 text-left text-lg border-b border-indigo-200">Date</th>
+        <th class="p-3 text-left text-lg border-b border-indigo-200">Spent</th>
+        <th class="p-3 text-left text-lg border-b border-indigo-200">Budget</th>
+        <th class="p-3 text-center text-lg border-b border-indigo-200">Report</th>
       </tr>
     </thead>
     <tbody>
       <% @reports.each do |report| %>
-        <tr class="">
-          <td class="py-5 px-3">
+        <tr class="" onclick="<%= report_path(report) %>">
+          <td class="py-5 px-3 text-indigo-700">
             <%= report %>
           </td>
           <td class="py-5 px-3 text-gray-700">
             <%= number_to_currency(report.total_amount) %>
           </td>
           <td class="py-5 px-3 text-gray-700">
-            <%= number_to_currency(report&.budget&.amount) || "-" %>
+            <%= number_to_currency(report&.budget&.amount) || "<span class='text-4xl text-indigo-600 ml-7'>-</span>".html_safe %>
           </td>
+          <td class="text-center">
+            <%= link_to report_path(report), class: "btn" do %> 
+             <i class="fas fa-file-invoice mr-1"></i> Report
+            <% end %>
+          </td> 
         </tr>
       <% end %> 
     </tbody>

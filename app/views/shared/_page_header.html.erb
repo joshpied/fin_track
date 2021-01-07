@@ -1,0 +1,12 @@
+<header class="bg-indigo-500 text-white shadow-lg rounded-2xl p-8 mt-6 flex flex-wrap md:flex-row flex-col justify-between">
+  <h1 class="text-4xl flex flex-row">
+    <% if icon %>
+      <i class="<%= icon %> mr-3"></i>
+    <% end %>
+    
+    <%= title %>
+  </h1>
+  <h2 class="md:ml-4 text-3xl block md:text-4xl">
+    <%= subtitle %>
+  </h2> 
+</header>

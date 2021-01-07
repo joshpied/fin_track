@@ -25,26 +25,26 @@
 
   // Pagy nav styles
   .pagy-nav {
-    @apply inline-flex shadow-md border border-indigo-600 rounded-md p-5 space-x-5;
+    @apply inline-flex shadow-md border border-indigo-600 rounded-md p-3 space-x-5;
   }
 
-  .page {
+  .pagy-nav .page {
     @apply text-indigo-500;
   }
 
-  .page.active {
+  .pagy-nav .active {
     @apply text-gray-900;
   }
 
-  .page.prev {
+  .pagy-nav .prev {
     @apply text-gray-900;
   }
 
-  .page.next {
+  .pagy-nav .next {
     @apply text-gray-900 border-r border-transparent;
   }
 
-  .page.disabled {
+  .pagy-nav .disabled {
     @apply cursor-not-allowed text-gray-700;
   }
 
