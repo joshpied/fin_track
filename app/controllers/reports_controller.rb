@@ -58,11 +58,12 @@ class ReportsController < ApplicationController
   end
 
   def months
-    @reports = 
-      current_user
-      .reports
-      .order("report_date desc")
-    puts @reports
+    @pagy, @reports = pagy(current_user.reports.left_outer_joins(:budget), items: 2)
+    # @reports = 
+    #   current_user
+    #   .reports
+    #   .order("report_date desc")
+    # puts @reports
   end
   
   

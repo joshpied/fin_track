@@ -1,7 +1,37 @@
-<h1>monthly report list here</h1>
-<p><%= @reports.to_json %></p>
-<% @reports.each do |report| %>
-  <h2>
-    <%= report %>
-  </h2>
-<% end %>
+<div class="container-regular space-y-6">
+  <h1 class="text-center text-4xl mt-6">All Reports</h1>
+
+  <%# <><%= @reports.to_json %>
+  <table class="table-fixed border-separate border-2 rounded-md border-indigo-200 p-3 w-full">
+    <thead>
+      <tr>
+        <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Report Date</th>
+        <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Total Spent</th>
+        <th class="p-3 text-left text-lg text-indigo-500 border-b border-indigo-200">Budget</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reports.each do |report| %>
+        <tr class="">
+          <td class="py-5 px-3">
+            <%= report %>
+          </td>
+          <td class="py-5 px-3 text-gray-700">
+            <%= number_to_currency(report.total_amount) %>
+          </td>
+          <td class="py-5 px-3 text-gray-700">
+            <%= number_to_currency(report&.budget&.amount) || "-" %>
+          </td>
+        </tr>
+      <% end %> 
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <%== pagy_nav(@pagy) %>
+  </div>
+
+  <div class="text-center">
+    <%== pagy_info(@pagy) %>
+  </div>
+</div>
