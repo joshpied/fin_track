@@ -4,7 +4,7 @@
 /* Add any custom CSS here */
 @layer components {
   .container-narrow {
-    @apply xl:mx-96 lg:mx-56 md:mx-36 sm:mx-12 m-3 my-6;
+    @apply xl:mx-128 lg:mx-56 md:mx-36 sm:mx-12 m-3 my-6;
   }
 
   .container-large {
@@ -19,8 +19,29 @@
     @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-center text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
   }
 
+  .btn-outline {
+    @apply bg-white text-indigo-600 hover:bg-indigo-100;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700;
+  }
+
+  .btn-success {
+    @apply bg-green-600 hover:bg-green-700;
+  }
+
   .link {
     @apply font-medium text-gray-500 hover:text-gray-900 cursor-pointer;
+  }
+
+  // tooltip
+  .tooltip .tooltip-text {
+    @apply invisible p-4 absolute z-50 inline-block mb-20 text-sm w-1/2 rounded-lg bg-gray-700 text-white;
+  }
+  
+  .tooltip:hover .tooltip-text {
+    @apply visible;
   }
 
   // Pagy nav styles
@@ -47,8 +68,6 @@
   .pagy-nav .disabled {
     @apply cursor-not-allowed text-gray-700;
   }
-
-  
 
   .flash {
     &.success {

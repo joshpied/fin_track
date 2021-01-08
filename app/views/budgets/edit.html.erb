@@ -1,0 +1,15 @@
+<div class="container-narrow">
+  <h1 class="text-center text-3xl mb-8">Change Budget</h1>
+  <%= render partial: "form" %>
+  <div class="flex flex-row justify-between mt-7" role="group">
+    <%= link_to report_path(@budget.report_id), class: "btn btn-outline" do %><i class="fas fa-angle-left"></i> Back<% end %>
+    <%= link_to "Delete", 
+      budget_path(@budget), 
+      data: {
+        confirm: "Are you sure you want to remove the budget for this month? \n You can create new one later.",
+      },
+      method: :delete, 
+      class: "btn btn-danger"
+    %>
+  </div>
+</div>

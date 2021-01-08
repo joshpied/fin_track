@@ -12,4 +12,6 @@ class Report < ApplicationRecord
   def to_s
     report_date.strftime("%B %Y")
   end
+
+  # TODO add method to check if it is/isnt "locked", i.e. is not present month+year
 end

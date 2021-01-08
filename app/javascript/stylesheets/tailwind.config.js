@@ -7,12 +7,15 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {}
+    extend: {
+      margin: {
+        '120': '30rem',
+        '128': '32rem'
+      }
+    }
   },
   variants: {
     extend: {}
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ]
+  plugins: [require('@tailwindcss/forms')]
 };

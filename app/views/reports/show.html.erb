@@ -15,16 +15,24 @@
 
   <main class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     <div class="report flex flex-col space-y-5 mt-7">
-      <h2 class="text-2xl text-gray-700">
-        Total Spending: 
-        <span class="text-indigo-600">
-          <%= number_to_currency(@report.total_amount) %>
-        </span> 
-        <% if @report&.budget %>
-          /
-          <span><%= @report.budget.amount %></span>
+      <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 items-center justify-between">
+        <h2 class="text-2xl text-gray-700">
+          Total Spending: 
+          <span class="text-indigo-600">
+            <%= number_to_currency(@report.total_amount) %>
+          </span> 
+          
+          <% if @report.budget.present? %>
+            <span class="text-grey-800">/</span>
+            <%= link_to edit_budget_path(@report.budget), class: "link tooltip" do %>
+              <%= number_to_currency(@report.budget.amount) %>
+            <% end %>
+          <% end %>
+        </h2>
+        <% if @report.budget.blank? %>
+          <%= link_to '+ Budget for this month', new_budget_path, class: "btn" %>
         <% end %>
-      </h2>
+      </div>
       <%= render partial: 'shared/category_spending_table', :locals => {:categories => @transaction_categories} %>
     </div>
     <div class="transactions-list flex flex-col space-y-5 mt-7">

@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   resources :reports, only: [:index, :show] do
     get :months, on: :collection
   end
+
+  resources :budgets, only: [:new, :create, :edit, :update, :destroy]
 end
