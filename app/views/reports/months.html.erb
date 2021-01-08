@@ -7,6 +7,7 @@
         <th class="p-3 text-left text-lg border-b border-indigo-200">Date</th>
         <th class="p-3 text-left text-lg border-b border-indigo-200">Spent</th>
         <th class="p-3 text-left text-lg border-b border-indigo-200">Budget</th>
+        <th class="p-3 text-left text-lg border-b border-indigo-200">Status</th>
         <th class="p-3 text-center text-lg border-b border-indigo-200">Report</th>
       </tr>
     </thead>
@@ -22,9 +23,22 @@
           <td class="py-5 px-3 text-gray-700">
             <%= number_to_currency(report&.budget&.amount) || "<span class='text-4xl text-indigo-600 ml-7'>-</span>".html_safe %>
           </td>
+          <td class="py-5 px-3 text-gray-700">
+            <% if report&.budget %>
+              <% if report.budget.amount > report.total_amount %>
+                <i class="fas fa-chevron-down text-green-500  ml-4"></i>
+              <% elsif report.budget.amount == report.total_amount %>
+                <i class="fas fa-equals text-blue-500 ml-4"></i>
+              <% elsif report.budget.amount < report.total_amount %>
+                <i class="fas fa-chevron-up text-red-500 ml-4"></i>
+              <% end %>
+            <% else %>
+              <span class='text-4xl text-indigo-600 ml-4'>-</span>
+            <% end %>
+          </td>
           <td class="text-center">
-            <%= link_to report_path(report), class: "btn" do %> 
-             <i class="fas fa-file-invoice mr-1"></i> Report
+            <%= link_to report_path(report), class: "btn sm:rounded-lg" do %> 
+             <i class="fas fa-file-invoice sm:mr-1"></i> <span class="hidden sm:inline">Report</span>
             <% end %>
           </td> 
         </tr>
