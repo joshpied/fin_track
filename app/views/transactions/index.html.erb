@@ -1,4 +1,4 @@
-<div class="container-regular mb-8">
+<div class="container-narrow mb-8">
   <h1 class="text-4xl text-indigo-600 text-center my-6">Transactions in <%= @current_month_name %></h1>
 
   <div class="flex justify-start mb-6">
@@ -10,17 +10,17 @@
   <ul class="transactions flex flex-col justify-center space-y-6">
     <% if @transactions.each do |transaction| %>
       <%= link_to transaction_path(transaction) do %>
-        <li class="transaction flex flex-row justify-evenly items-center border-2 rounded-xl p-5 border-indigo-200 hover:border-indigo-500">
-          <div class="transaction-category-note flex-1">
+        <li class="transaction flex flex-row justify-evenly items-center space-x-3 border-2 rounded-xl p-5 border-indigo-200 hover:border-indigo-500 group">
+          <div class="transaction-category-note flex-1 truncate">
             <%= render partial: 'shared/category_badge', :locals => {:category_name => transaction.transaction_category.name} %>
-            <span class="ml-2 truncate text-gray-600 text-sm"><%= transaction.note %></span>
+            <span class="ml-2 text-gray-600 group-hover:text-gray-700 text-sm"><%= transaction.note %></span>
           </div>
 
-          <div class="transaction-amount mr-6">
+          <div class="transaction-amount text-indigo-400 group-hover:text-indigo-700 mr-6">
             -<%= number_to_currency(transaction.amount) %>
           </div>
 
-          <div class="transaction-date">
+          <div class="transaction-date text-gray-500 group-hover:text-gray-800">
             <%= transaction.date_formatted %>
           </div>
         </li>

@@ -4,7 +4,11 @@
 /* Add any custom CSS here */
 @layer components {
   .container-narrow {
-    @apply xl:mx-128 lg:mx-56 md:mx-36 sm:mx-12 m-3 my-6;
+    @apply 2xl:mx-128 xl:mx-96 lg:mx-56 md:mx-36 sm:mx-12 m-3 my-6;
+  }
+
+  .container-narrow-form {
+    @apply 2xl:mx-152 xl:mx-128 lg:mx-96 md:mx-36 sm:mx-12 m-3 my-6;
   }
 
   .container-large {

@@ -16,6 +16,17 @@ Rails.application.routes.draw do
   # get "/reports/months", to: 'reports#months'
   resources :reports, only: [:index, :show] do
     get :months, on: :collection
+    get 'years', action: :years, on: :collection
+    get 'years/:year', action: :year, on: :collection, as: :year
+
+
+    # get :years, :controller => :ieri, on: :collection do
+    #   get :year, :controller => :ieri, on: :collection
+    # end
+    # get :years, on: :collection, only: [:index, :show]
+    #  do
+    #   get :year
+    # end
   end
 
   resources :budgets, only: [:new, :create, :edit, :update, :destroy]

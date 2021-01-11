@@ -66,6 +66,20 @@ class ReportsController < ApplicationController
   def months
     @pagy, @reports = pagy(current_user.reports.left_outer_joins(:budget).order("report_date desc"), items: 12)
   end
+
+  def years
+    # @pagy, @year_reports = pagy(current_user.reports.left_outer_joins(:budget).order("report_date desc"), items: 12)
+    @year_reports = current_user.reports.distinct.pluck(:year).sort_by { |year| }
+  end
+
+  def year
+    @year = params[:year]
+    @reports = 
+      current_user
+      .reports
+      .left_outer_joins(:budget)
+      .where("year = ?", @year)
+  end
   
   
 end
