@@ -19,6 +19,8 @@ class ReportsController < ApplicationController
       .order("report_date desc")
       .limit(6)
       # .pluck(:id, :report_date)
+
+    @year_reports = current_user.reports.distinct.pluck(:year).sort_by { |year| }
     
     @total_spent_year = current_user.reports.where("year = ?", @current_year).sum(:total_amount)
       
@@ -68,8 +70,7 @@ class ReportsController < ApplicationController
   end
 
   def years
-    # @pagy, @year_reports = pagy(current_user.reports.left_outer_joins(:budget).order("report_date desc"), items: 12)
-    @year_reports = current_user.reports.distinct.pluck(:year).sort_by { |year| }
+    @pagy_a, @year_reports = pagy_array(current_user.reports.distinct.pluck(:year).sort_by { |year| }, items: 8)
   end
 
   def year
@@ -79,7 +80,16 @@ class ReportsController < ApplicationController
       .reports
       .left_outer_joins(:budget)
       .where("year = ?", @year)
+    @total_spent_year = current_user.reports.where("year = ?", @year).sum(:total_amount)
+    # hash of transaction_category.name => transaction.amount spent this year
+    @transaction_categories = 
+      current_user
+      .transactions
+      .where('extract(year from transaction_date) = ?', @year)
+      .includes(:transaction_category)
+      .group("transaction_categories.name")
+      .sum(:amount)
+      .sort_by { |category, amount| amount }
+      .reverse  
   end
-  
-  
 end

@@ -1,5 +1,3 @@
-list of year reports
-<%= @year_reports.to_json %>
 <div class="container-regular space-y-6">
   <%= render partial: 'shared/page_header', :locals => {:title => "All Yearly Reports", :icon => "fas fa-clipboard-list mr-1", :subtitle => ""} %>
 
@@ -26,11 +24,11 @@ list of year reports
     </tbody>
   </table>
 
-  <%# <div class="text-center"> %>
-    <%# <%== pagy_nav(@pagy) %> %>
-  <%# </div> %>
+  <div class="text-center">
+    <%== pagy_nav(@pagy_a) %>
+  </div>
 
-  <%# <div class="text-center"> %>
-    <%# <%== pagy_info(@pagy) %> %>
-  <%# </div> %>
+  <div class="text-center">
+    <%== pagy_info(@pagy_a) %>
+  </div>
 </div>
