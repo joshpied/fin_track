@@ -75,12 +75,15 @@ class ReportsController < ApplicationController
 
   def year
     @year = params[:year]
+
     @reports = 
       current_user
       .reports
       .left_outer_joins(:budget)
       .where("year = ?", @year)
+
     @total_spent_year = current_user.reports.where("year = ?", @year).sum(:total_amount)
+    
     # hash of transaction_category.name => transaction.amount spent this year
     @transaction_categories = 
       current_user
