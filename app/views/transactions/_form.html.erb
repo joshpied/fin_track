@@ -47,3 +47,14 @@
     <%= form.submit class: "btn w-full" %>
   </div>
 <% end %>
+
+<script>
+  const form = document.querySelector('form');
+  const textArea = document.querySelector('textarea');
+  textArea.addEventListener('keydown', function(e) {
+    // submit form when in textarea with cmd + enter
+    if(e.keyCode == 13 && e.metaKey) {
+      form.submit();
+    }
+  });
+</script>
