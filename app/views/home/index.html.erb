@@ -1,4 +1,65 @@
-<div class="bg-indigo-300 p-10 rounded-lg shadow-lg max-w-lg mx-auto text-white text-center mt-32">
-  <h1 class="font-black text-6xl text-center">HOME</h1>
-  <p class="text-lg leading-tight mt-4 font-light">Nice</p>
+<div class="text-gray-700 bg-gray-100">
+
+  <div class="hero shadow-lg w-full p-20 flex flex-col" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
+    <h1 class="text-4xl text-white font-bold">Welcome to FinTrack!</h1>
+    <h2 class="text-2xl text-white font-light">Monitor your finances anywhere you go.</h2>
+    <div class="mt-12">
+      <%= link_to sign_up_path, class: "bg-white text-indigo-800 text-sm font-bold shadow-lg uppercase py-4 px-8 rounded-full hover:bg-gray-100" do%>
+        Get Started <i class="fas fa-angle-right opacity-0 group-hover:opacity-100"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <section class="features container mx-auto px-6 p-10 bg-gray-100">
+    <h2 class="text-4xl font-bold text-center text-gray-700 mb-8">
+      Features
+    </h2>
+    <div class="flex items-center flex-wrap mb-20">
+      <div class="w-full md:w-1/2">
+        <h4 class="text-3xl text-gray-700 font-bold mb-3">Transactions</h4>
+        <p class="text-gray-600 mb-8">Add in transactions as you spend and they will be added to your monthly report. You can track your spending by category to see what your money is going toward.</p>
+      </div>
+      <div class="w-full md:w-1/2">
+        <img src="/images/transactions.svg" alt="Transactions" />
+      </div>
+    </div>
+
+    <div class="flex items-center flex-wrap mb-20">
+      <div class="w-full md:w-1/2">
+        <img src="/images/reports.svg" alt="Reports" />
+      </div>
+      <div class="w-full md:w-1/2 pl-10">
+        <h4 class="text-3xl text-gray-700 font-bold mb-3">Reporting</h4>
+        <p class="text-gray-600 mb-8">Fintrack automatically generates reports on your spending monthly and yearly.</p>
+      </div>
+    </div>
+
+    <div class="flex items-center flex-wrap mb-20">
+      <div class="w-full md:w-1/2">
+        <h4 class="text-3xl text-gray-700 font-bold mb-3">Syncing</h4>
+        <p class="text-gray-600 mb-8">Our reports allows you to access your data across all your devices in any browser.</p>
+      </div>
+      <div class="w-full md:w-1/2">
+        <img src="/images/syncing.svg" alt="Syncing" />
+      </div>
+    </div>
+  </section>
+
+  <section class="call-to-action bg-indigo-200 shadow-lg w-full p-20 flex flex-col items-center">
+    <h2 class="text-3xl font-bold mb-2">
+      Sign up now!
+    </h2>
+    <p class="my-4 text-xl">Register and start tracking!</p>
+    <div class="mt-12">
+      <%= link_to sign_up_path, class: "bg-white text-indigo-800 text-sm font-bold shadow-lg uppercase py-4 px-8 rounded-full hover:bg-gray-100" do%>
+        Get Started <i class="fas fa-angle-right opacity-0 group-hover:opacity-100"></i>
+      <% end %>
+    </div>
+  </section>
+
+  <footer class="bg-gray-100">
+    <div class="container px-4 py-6">© Josh Piedimonte, <%= Time.now.year %></div>
+  </footer>
+
+
 </div>
