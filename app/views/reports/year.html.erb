@@ -3,8 +3,8 @@
     
   <main class="grid grid-cols-1 md:grid-cols-2 gap-9">
     <div class="recent-report flex flex-col space-y-5 mt-7">
-      <h2 class="text-2xl text-gray-700">
-        Total Spending in <%= @year %>: 
+      <h2 class="text-4xl text-gray-700">
+        Total <%= Time.now.year > @year.to_i ? "Spent" : "Spending" %> in <%= @year %>: 
         <span class="text-indigo-600">
           <%= number_to_currency(@total_spent_year) %>
         </span>
@@ -20,6 +20,7 @@
     </div>
 
     <div class="reports-list flex flex-col space-y-5 mt-7">
+      <%= line_chart @monthly_spending, xtitle: "Year", ytitle: "Spending", discrete: true, prefix: "$", thousands: ","%>
       <h2 class="text-2xl text-indigo-600">Monthly Reports for <%= @year %></h2>
       <% if @reports.length > 0 %>
         <ul class="space-y-3">

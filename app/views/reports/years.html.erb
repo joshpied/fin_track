@@ -1,34 +1,40 @@
 <div class="container-regular space-y-6">
-  <%= render partial: 'shared/page_header', :locals => {:title => "All Yearly Reports", :icon => "fas fa-clipboard-list mr-1", :subtitle => ""} %>
+  <%= render partial: 'shared/page_header', :locals => {:title => "Yearly Reports", :icon => "fas fa-clipboard-list mr-1", :subtitle => ""} %>
 
-  <table class="table-fixed border-separate border-2 rounded-md border-indigo-200 p-3 w-full">
-    <thead>
-      <tr class="text-indigo-500">
-        <th class="p-3 text-left text-lg border-b border-indigo-200">Year</th>
-        <th class="p-3 text-center text-lg border-b border-indigo-200">Report</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @year_reports.each do |year| %>
-        <tr class="">
-          <td class="py-5 px-3 text-indigo-700">
-            <%= year %>
-          </td>
-          <td class="text-center">
-            <%= link_to year_reports_path(year), class: "btn sm:rounded-lg" do %> 
-             <i class="fas fa-file-invoice sm:mr-1"></i> <span class="hidden sm:inline">Report</span>
-            <% end %>
-          </td> 
-        </tr>
-      <% end %> 
-    </tbody>
-  </table>
+  <main class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <%= line_chart @spending_by_year, xtitle: "Year", ytitle: "Spending", discrete: true, prefix: "$", thousands: ","%>
+    <section class="space-y-9">
+      <table class="table-fixed border-separate border-2 rounded-md border-indigo-200 p-3 w-full">
+        <thead>
+          <tr class="text-indigo-500">
+            <th class="p-3 text-left text-lg border-b border-indigo-200">Year</th>
+            <th class="p-3 text-center text-lg border-b border-indigo-200">Report</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @years.each do |year| %>
+            <tr class="">
+              <td class="py-5 px-3 text-indigo-700">
+                <%= year %>
+              </td>
+              <td class="text-center">
+                <%= link_to year_reports_path(year), class: "btn sm:rounded-lg" do %> 
+                <i class="fas fa-file-invoice sm:mr-1"></i> <span class="hidden sm:inline">Report</span>
+                <% end %>
+              </td> 
+            </tr>
+          <% end %> 
+        </tbody>
+      </table>
+      <div class="text-center">
+        <%== pagy_nav(@pagy_a) %>
+      </div>
 
-  <div class="text-center">
-    <%== pagy_nav(@pagy_a) %>
-  </div>
+      <div class="text-center">
+        <%== pagy_info(@pagy_a) %>
+      </div>
+    </section>
+  </main>
 
-  <div class="text-center">
-    <%== pagy_info(@pagy_a) %>
-  </div>
+  
 </div>

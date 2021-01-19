@@ -2,16 +2,16 @@
   <%= render partial: 'shared/page_header', :locals => {:title => "Year to Date Report", :icon => "fas fa-file-alt mr-1", :subtitle => @current_year} %>
     
   <main class="grid grid-cols-1 md:grid-cols-2 gap-9">
-    <div class="recent-report flex flex-col space-y-5 mt-7">
-    <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false %>
-      <h2 class="text-2xl text-gray-700">
+    <div class="recent-report flex flex-col mt-7">
+      <h2 class="text-2xl text-gray-700 mb-8">
         Total Spending in <%= @current_year %>: 
         <span class="text-indigo-600">
           <%= number_to_currency(@total_spent_year) %>
         </span>
       </h2>
       <% if @transaction_categories.length > 0 %>
-        <%= render partial: 'shared/category_spending_table', :locals => {:categories => @transaction_categories} %>
+        <h2 class="text-xl text-indigo-500 mb-4">Spending by Category this Year</h2>
+        <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false %>
       <% else %>
         <div class="text-center pt-12">
           <h3 class="text-2xl text-indigo-500">No Spending yet!</h3>

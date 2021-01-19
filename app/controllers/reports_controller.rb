@@ -70,7 +70,15 @@ class ReportsController < ApplicationController
   end
 
   def years
-    @pagy_a, @year_reports = pagy_array(current_user.reports.distinct.pluck(:year).sort_by { |year| }, items: 8)
+    # array of unique reporting years
+    @pagy_a, @years = pagy_array(current_user.reports.distinct.pluck(:year).sort_by { |year| }, items: 8)
+    @spending = []
+    # get total spending for each year (need to sort by ascending)
+    @years.sort.each do |year|
+      @spending.push(current_user.reports.where("year = ?", year).sum(:total_amount).to_f)
+    end
+    
+    @spending_by_year = @years.sort.zip(@spending) # combine into array of arrays eg. [ [year, spending] ]
   end
 
   def year
@@ -81,6 +89,9 @@ class ReportsController < ApplicationController
       .reports
       .left_outer_joins(:budget)
       .where("year = ?", @year)
+      .order("report_date asc")
+
+    @monthly_spending = @reports.map { |report| [Date::MONTHNAMES[report.month], report.total_amount.to_f] }
 
     @total_spent_year = current_user.reports.where("year = ?", @year).sum(:total_amount)
     
