@@ -42,7 +42,7 @@ class TransactionsController < ApplicationController
     )
 
     if @transaction.save
-      redirect_to transaction_path(@transaction), notice: "Transaction Created!"
+      redirect_to transaction_path(@transaction), notice: "Transaction Added!"
     else
       @errors = @transaction.errors.full_messages
       render :new

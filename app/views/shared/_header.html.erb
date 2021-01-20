@@ -18,10 +18,8 @@
       </div>
       <% if signed_in? %>
         <nav class="hidden md:flex space-x-10">
+          <%= link_to 'Dashboard', dashboards_path, class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
           <%= link_to 'Transactions', transactions_path, class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
-          <% if recent_report_id %>
-            <%= link_to 'This Month', report_path(recent_report_id), class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
-          <% end %>
           <%= link_to 'Reports', reports_path, class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
           <%# <a href="/settings" class="text-base font-medium text-gray-500 hover:text-gray-900"> %>
             <%# Settings %>
@@ -68,21 +66,19 @@
         </div>
         <div class="mt-6">
           <nav class="grid gap-y-8">
+          
+            <%= link_to dashboards_path, class: "-m-3 p-3 flex items-center rounded-md hover:bg-gray-50" do %>
+              <i class="fas fa-calendar-day text-indigo-600"></i>
+              <span class="ml-3 text-base font-medium text-gray-900">
+                Dashboard
+              </span>
+            <% end %>
             
             <%= link_to transactions_path, class: "-m-3 p-3 flex items-center rounded-md hover:bg-gray-50" do %>
               <i class="fas fa-receipt text-indigo-600"></i>
               <span class="ml-3 text-base font-medium text-gray-900">
                 Transactions
               </span>
-            <% end %>
-
-            <% if recent_report_id %>
-              <%= link_to report_path(recent_report_id), class: "-m-3 p-3 flex items-center rounded-md hover:bg-gray-50" do %>
-                <i class="fas fa-calendar-day text-indigo-600"></i>
-                <span class="ml-3 text-base font-medium text-gray-900">
-                  This Month
-                </span>
-              <% end %>
             <% end %>
 
             <%= link_to reports_path, class: "-m-3 p-3 flex items-center rounded-md hover:bg-gray-50" do %>

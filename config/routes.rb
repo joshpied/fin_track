@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     root to: "home#index"
   end
 
+  # get "/dashboard", to: "dashboard#index", controller: 'dashboard'
+  resources :dashboards, only: [:index]
+
   resources :transactions
 
   # get "/reports/months", to: 'reports#months'
@@ -18,15 +21,6 @@ Rails.application.routes.draw do
     get :months, on: :collection
     get 'years', action: :years, on: :collection
     get 'years/:year', action: :year, on: :collection, as: :year
-
-
-    # get :years, :controller => :ieri, on: :collection do
-    #   get :year, :controller => :ieri, on: :collection
-    # end
-    # get :years, on: :collection, only: [:index, :show]
-    #  do
-    #   get :year
-    # end
   end
 
   resources :budgets, only: [:new, :create, :edit, :update, :destroy]
