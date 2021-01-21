@@ -1,4 +1,4 @@
-<main class="container-narrow">
+<main class="2xl:mx-96 xl:mx-72 lg:mx-36  m-3 my-6">
   <h1 class="text-indigo-600 text-4xl my-12">Hi, <%= current_user.email %></h1>
   <section class="shadow-md rounded-sm bg-white flex flex-col space-y-12">
     <%# Top %>
@@ -8,15 +8,15 @@
           <i class="fas fa-credit-card text-2xl text-white"></i>
         </div>
         <div>
-          <h3 class="text-2xl text-gray-800 font-bold">This Month</h3>
+          <h3 class="text-lg md:text-2xl text-gray-800 font-bold">This Month</h3>
           <%= link_to "Transactions", transactions_path, class: "link" %>
         </div>
       </div>
       <div class="flex flex-col items-end">
-        <h2 class="text-4xl text-gray-800 font-bold"><%= number_to_currency(@recent_report.total_amount) %></h2>
+        <h2 class="text-2xl md:text-4xl text-gray-800 font-bold"><%= number_to_currency(@recent_report.total_amount) %></h2>
         <p class="text-sm text-gray-500 flex items-center">
-          <i class="fas fa-circle text-blue-500 text-xs mr-2"></i> 
-          Current Spent
+          <i class="fas fa-circle text-indigo-600 text-xs mr-2"></i> 
+          Current Spending
         </p>
       </div>
     </div>
@@ -29,22 +29,22 @@
       </div>
     <% end %>
     <%# Three stats %>
-    <div class="flex flex-row justify-between space-x-6 px-10">
+    <div class="flex flex-row flex-wrap justify-between space-x-6 px-10">
       <div class="flex flex-col flex-1 border-r-2 border-gray-300 space-y-2 p-2">
-        <p class="text-lg text-gray-500"><i class="fas fa-circle text-sm text-blue-500"></i> Spent</p>
-        <h2 class="text-3xl text-gray-800 font-semibold"><%= number_to_currency(@recent_report.total_amount) %></h2>
+        <p class="text-base text-gray-500"><i class="fas fa-circle text-sm text-indigo-600"></i> Spent</p>
+        <h2 class="text-lg md:text-3xl text-gray-800 font-semibold"><%= number_to_currency(@recent_report.total_amount) %></h2>
       </div>
       <% if @recent_report.budget.blank? %>
         <%= link_to '+ Budget for this month', new_budget_path, class: "hover:bg-gray-100 rounded-2xl p-2" %>
       <% else %>
         <div class="flex flex-col flex-1 border-r-2 border-gray-300 space-y-2 p-2">
-          <p class="text-lg text-gray-500">Remaining</p>
-          <h2 class="text-3xl text-gray-800 font-semibold"><%= number_to_currency(@spent_budget_difference) %></h2>
+          <p class="text-base text-gray-500">Remaining</p>
+          <h2 class="text-lg md:text-3xl text-gray-800 font-semibold"><%= number_to_currency(@spent_budget_difference) %></h2>
         </div>
         <%= link_to edit_budget_path(@recent_report.budget), class: "flex-1" do %>
           <div class="flex flex-col space-y-2 hover:bg-gray-100 rounded-2xl p-2">
-            <p class="text-lg text-gray-500">Budget</p>
-            <h2 class="text-3xl text-gray-800 font-semibold"><%= number_to_currency(@recent_report.budget.amount) %></h2>
+            <p class="text-base text-gray-500">Budget</p>
+            <h2 class="text-lg md:text-3xl text-gray-800 font-semibold"><%= number_to_currency(@recent_report.budget.amount) %></h2>
           </div>
         <% end %>
       <% end %>
