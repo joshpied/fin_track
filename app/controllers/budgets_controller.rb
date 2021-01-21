@@ -20,7 +20,10 @@ class BudgetsController < ApplicationController
     end
     
     if @budget.save
-      redirect_to report_path(report), notice: "Budget Created!"
+      # redirect_back fallback_location: root_path
+      # redirect_to report_path(report), notice: "Budget Created!"
+      # redirect_back fallback_location: dashboards_path
+      redirect_to dashboards_path
     else
       @errors = @budget.errors.full_messages
       render :new
@@ -35,7 +38,10 @@ class BudgetsController < ApplicationController
     @budget = current_user.budgets.find(params[:id])
 
     if @budget.update_attributes(budget_params)
-      redirect_to report_path(@budget.report_id), notice: "Budget Updated!"
+      # redirect_to report_path(@budget.report_id), notice: "Budget Updated!"
+      redirect_to dashboards_path
+      # redirect_back fallback_location: dashboards_path
+      # redirect_back fallback_location: '/', allow_other_host: false
     else
       @errors = @budget.errors.full_messages
       render :edit
@@ -47,10 +53,13 @@ class BudgetsController < ApplicationController
     
     if @budget.destroy
       # flash[:success] = 'Budget was successfully deleted.'
-      redirect_to report_path(@budget.report_id), notice: "Budget Deleted"
+      # redirect_to report_path(@budget.report_id), notice: "Budget Deleted"
+      redirect_to dashboards_path
     else
       flash[:error] = 'Something went wrong'
-      redirect_to report_path(@budget.report_id)
+      # redirect_to report_path(@budget.report_id)
+      # redirect_back fallback_location: root_path
+      # redirect_to dashboards_path
     end
   end
 

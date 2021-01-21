@@ -1,3 +1,36 @@
-// Place all the styles related to the Dashboards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+progress[value] {
+  // -webkit-appearance: none;
+  // -moz-appearance: none;
+  // appearance: none;
+  // border: none;
+
+  /* Dimensions */
+  // width: 250px;
+  // height: 20px;
+}
+
+// progress {
+//   color: lightblue;
+// }
+
+// progress::-webkit-progress-value {
+//   background: lightblue;
+// }
+
+// progress::-moz-progress-bar {
+//   background: lightcolor;
+// }
+
+progress::-webkit-progress-value {
+  background: rgba(79, 70, 229, 0.9);
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-bar {
+  background: rgba(55, 65, 81, 0.1);
+  border-radius: 10px;
+}
+
+.overbudget::-webkit-progress-value {
+  background: rgba(220, 38, 38, 0.7);
+}
