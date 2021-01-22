@@ -62,4 +62,8 @@ module ApplicationHelper
     icons.default = "plus"
     return icons[category]
   end
+
+  def date_to_month_year(date)
+    date.strftime("%B %Y")
+  end
 end

@@ -4,25 +4,19 @@ class ReportsController < ApplicationController
   def index
     @current_month = Time.now.month
     @current_year = Time.now.year
-    # current monthly report
-    @recent_report = 
-      current_user
-      .reports
-      .where("month = ? AND year = ?", @current_month, @current_year)
-      .first 
-    # previous monthly reports
     @reports = 
       current_user
       .reports
-      .where
-      .not("month = ? AND year = ?", @current_month, @current_year)
-      .order("report_date desc")
-      .limit(6)
-      # .pluck(:id, :report_date)
+      .order("report_date asc")
+      .limit(12)
+      .pluck(:report_date, :total_amount, :id)
 
-    @year_reports = current_user.reports.distinct.pluck(:year).sort_by { |year| }
+    @area_chart_reports = @reports.map{ |report_date, total_amount| [report_date.strftime("%B %Y"), total_amount] }
+    @recent_monthly_report = @reports.last
+    @previous_monthly_reports = @reports[0...-1].reverse.take(6)
+    @yearly_reports = current_user.reports.distinct.pluck(:year).sort_by { |year| }
     
-    @total_spent_year = current_user.reports.where("year = ?", @current_year).sum(:total_amount)
+    # @total_spent_year = current_user.reports.where("year = ?", @current_year).sum(:total_amount)
       
     # hash of transaction_category.name => transaction.amount spent this year
     @transaction_categories = 
@@ -33,7 +27,11 @@ class ReportsController < ApplicationController
         .group("transaction_categories.name")
         .sum(:amount)
         .sort_by { |category, amount| amount }
-        .reverse  
+        .reverse 
+    @transaction_category_colors = []
+    @transaction_categories.each do |category, _|
+      @transaction_category_colors << helpers.transaction_category_color(category)
+    end
   end
 
   def show
@@ -105,5 +103,10 @@ class ReportsController < ApplicationController
       .sum(:amount)
       .sort_by { |category, amount| amount }
       .reverse  
+      
+    @transaction_category_colors = []
+    @transaction_categories.each do |category, _|
+      @transaction_category_colors << helpers.transaction_category_color(category)
+    end
   end
 end

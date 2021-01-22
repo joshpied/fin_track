@@ -1,35 +1,45 @@
 <div class="container-regular mt-6 mb-6">
   <%= render partial: 'shared/page_header', :locals => {:title => "Year to Date Report", :icon => "fas fa-file-alt mr-1", :subtitle => @current_year} %>
-    
-  <main class="grid grid-cols-1 md:grid-cols-2 gap-9">
-    <div class="recent-report flex flex-col mt-7">
-      <h2 class="text-2xl text-gray-700 mb-8">
-        Total Spending in <%= @current_year %>: 
-        <span class="text-indigo-600">
-          <%= number_to_currency(@total_spent_year) %>
-        </span>
-      </h2>
-      <% if @transaction_categories.length > 0 %>
-        <h2 class="text-xl text-indigo-500 mb-4">Spending by Category this Year</h2>
-        <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false %>
-      <% else %>
-        <div class="text-center pt-12">
-          <h3 class="text-2xl text-indigo-500">No Spending yet!</h3>
-          <h4 class="text-xl text-gray-500">Start by adding transactions.</h4>
-        </div>
-      <% end %>
-    </div>
-    
-    
-    <div class="reports-lists flex flex-col mt-7">
 
-      <div class="current-report mb-12 space-y-5">
+  <main class="grid grid-cols-1 gap-24">
+    <section class="space-y-8 mt-9">
+      <h2 class="text-2xl text-indigo-700">
+        Last <%= @area_chart_reports.length %> Months
+      </h2>
+      <%= area_chart @area_chart_reports, prefix: "$", thousands: ",", colors: ["rgba(79, 70, 229, 0.7)"] %>
+    </section>
+    <% if @transaction_categories.length > 0 %>
+      <section class="grid grid-cols-1 xl:grid-cols-2 gap-9">
+        <h2 class="text-2xl text-indigo-700 mb-4 col-span-2">Spending by Category (<%= @current_year %>)</h2>
+        <div class="col-span-2 xl:col-span-1 xl:mr-24">
+          <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false, colors: @transaction_category_colors %>
+        </div>
+        <div class="h-72 overflow-y-scroll">
+          <ul class="flex flex-col space-y-3 px-12">
+            <% @transaction_categories.each do |category, amount| %>
+              <li class="flex flex-row justify-between items-center bg-white rounded-lg p-4">
+                <%= render partial: 'shared/category_badge', :locals => {:category_name => category} %>
+                <span class="text-xl font-bold"><%= number_to_currency(amount) %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+    <% else %>
+      <div class="text-center pt-12">
+        <h3 class="text-2xl text-indigo-500">No Spending yet!</h3>
+        <h4 class="text-xl text-gray-500">Start by adding transactions.</h4>
+      </div>
+    <% end %>
+
+    <section class="grid grid-cols-3 gap-x-10">
+      <div class="space-y-3">
         <h2 class="text-2xl text-indigo-600">Current Monthly Report</h2>
-        <% if @recent_report %>
-          <ul class="">
-            <li class="">
-              <%= link_to report_path(@recent_report), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
-                <%= @recent_report %>
+        <% if @recent_monthly_report %>
+          <ul>
+            <li>
+              <%= link_to report_path(@recent_monthly_report[2]), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
+                <%= date_to_month_year(@recent_monthly_report[0]) %>
               <% end %>
             </li> 
           </ul>
@@ -41,14 +51,14 @@
         <% end %>
       </div>
 
-      <div class="monthly-reports space-y-5">
-        <% if @reports.length > 0 %>
+      <div class="space-y-3">
+        <% if @previous_monthly_reports.length > 0 %>
           <h2 class="text-2xl text-indigo-600">Previous Monthly Reports</h2>
           <ul class="space-y-3">
-            <% @reports.each do |report|  %>
+            <% @previous_monthly_reports.each do |date,_, id|  %>
               <li class="">
-                <%= link_to report_path(report), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
-                  <%= report %>
+                <%= link_to report_path(id), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
+                  <%= date_to_month_year(date) %>
                 <% end %>
               </li>  
             <% end %>
@@ -60,13 +70,14 @@
           </ul>
         <% end %>
       </div>
-      <div class="current-report space-y-5">
-        <% if @year_reports.length > 0 %>
+
+      <div class="space-y-3">
+        <% if @yearly_reports.length > 0 %>
           <h2 class="text-2xl text-indigo-600">Yearly Reports</h2>
           <ul class="space-y-3">
-            <% @year_reports.each do |year|  %>
+            <% @yearly_reports.each do |year| %>
               <li class="">
-                <%= link_to year_reports_path(year), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
+                <%= link_to year_reports_url(year), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10" do %>
                   <%= year %>
                 <% end %>
               </li>  
@@ -79,12 +90,13 @@
           </ul>
         <% end %>
       </div>
-      
-    </div>
+    </section>
+
   </main>
+    
+  
   
 </div>
 
 <%# <%= @recent_report.to_json %>
- <%# <%= @reports.to_json %> 
 <%# <%= @transaction_categories.to_json %>

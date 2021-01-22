@@ -1,0 +1,14 @@
+<% height = 16 if local_assigns[:height].nil? %>
+
+<%# set height of viewable list (16 rem is default) %>
+<div class="overflow-y-scroll" style="height: <%= height %>rem">
+  <ul class="flex flex-col space-y-3 px-12">
+    <%# takes array of key-value pairs where: 0=category, 1=amount %>
+    <% categories.each do |category, amount| %>
+      <li class="flex flex-row justify-between items-center bg-white rounded-lg p-4">
+        <%= render partial: 'shared/category_badge', :locals => {:category_name => category} %>
+        <span class="text-xl font-bold"><%= number_to_currency(amount) %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>

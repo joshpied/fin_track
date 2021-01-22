@@ -1,26 +1,17 @@
-<div class="container-regular mt-6 mb-6">
+<div class="container-large mt-6 mb-6">
   <%= render partial: 'shared/page_header', :locals => {:title => "Year Report", :icon => "fas fa-file-alt mr-1", :subtitle => @year} %>
     
-  <main class="grid grid-cols-1 md:grid-cols-2 gap-9">
-    <div class="recent-report flex flex-col space-y-5 mt-7">
-      <h2 class="text-4xl text-gray-700">
-        Total <%= Time.now.year > @year.to_i ? "Spent" : "Spending" %> in <%= @year %>: 
-        <span class="text-indigo-600">
-          <%= number_to_currency(@total_spent_year) %>
-        </span>
-      </h2>
-      <% if @transaction_categories.length > 0 %>
-        <%= render partial: 'shared/category_spending_table', :locals => {:categories => @transaction_categories} %>
-      <% else %>
-        <div class="text-center">
-          <h1 class="text-2xl">No Spending yet!</h1>
-          <h2 class="text-xl text-gray-500">Start by adding transactions.</h2>
-        </div>
-      <% end %>
-    </div>
+  <main class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <h2 class="text-4xl col-span-2 justify-self-center mt-12">
+      <span class="text-indigo-600">
+        <%= number_to_currency(@total_spent_year) %>
+      </span>
+      <span class="text-gray-600 font-semibold">spent in <%= @year %></span>
+    </h2>
 
-    <div class="reports-list flex flex-col space-y-5 mt-7">
-      <%= line_chart @monthly_spending, xtitle: "Year", ytitle: "Spending", discrete: true, prefix: "$", thousands: ","%>
+    <div class="monthly-col col-span-2 lg:col-span-1 flex flex-col space-y-5 mt-7">
+      <h2 class="text-2xl text-indigo-700 mb-4 col-span-2">Monthly Spending</h2>
+      <%= area_chart @monthly_spending, xtitle: "Year", ytitle: "Spending", discrete: true, prefix: "$", thousands: ",", colors: ["rgba(79, 70, 229, 0.7)"] %>
       <h2 class="text-2xl text-indigo-600">Monthly Reports for <%= @year %></h2>
       <% if @reports.length > 0 %>
         <ul class="space-y-3">
@@ -34,5 +25,19 @@
         </ul>
       <% end %>
     </div>
+
+    <div class="category-col flex flex-col space-y-8 mt-7">
+      <h2 class="text-2xl text-indigo-700 mb-4 col-span-2">Spending by Category</h2>
+      <% if @transaction_categories.length > 0 %>
+        <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false, colors: @transaction_category_colors %>
+        <%= render partial: 'shared/category_spending_list', :locals => { :categories => @transaction_categories, :height => 26 }%>
+      <% else %>
+        <div class="text-center">
+          <h1 class="text-2xl">No Spending yet!</h1>
+          <h2 class="text-xl text-gray-500">Start by adding transactions.</h2>
+        </div>
+      <% end %>
+    </div>
+
   </main>
 </div>
