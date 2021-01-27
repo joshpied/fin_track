@@ -56,7 +56,7 @@ class ReportsController < ApplicationController
         .transactions
         .where("report_id = ?", report_id)
         .order("transaction_date desc"),
-        items: 8
+        items: 6
       )
 
     @transaction_categories = 
@@ -68,6 +68,12 @@ class ReportsController < ApplicationController
       .sum(:amount)
       .sort_by { |category, amount| amount }
       .reverse
+    if @transaction_categories.present?
+      @transaction_category_colors = []
+      @transaction_categories.each do |category, _|
+        @transaction_category_colors << helpers.transaction_category_color(category)
+      end
+    end
   end
 
   def months

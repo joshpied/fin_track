@@ -14,16 +14,7 @@
         <div class="col-span-2 xl:col-span-1 xl:mr-24">
           <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false, colors: @transaction_category_colors %>
         </div>
-        <div class="h-72 overflow-y-scroll">
-          <ul class="flex flex-col space-y-3 px-12">
-            <% @transaction_categories.each do |category, amount| %>
-              <li class="flex flex-row justify-between items-center bg-white rounded-lg p-4">
-                <%= render partial: 'shared/category_badge', :locals => {:category_name => category} %>
-                <span class="text-xl font-bold"><%= number_to_currency(amount) %></span>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        <%= render partial: 'shared/category_spending_list', :locals => { :categories => @transaction_categories, :height => 26 }%>
       </section>
     <% else %>
       <div class="text-center pt-12">
@@ -31,7 +22,6 @@
         <h4 class="text-xl text-gray-500">Start by adding transactions.</h4>
       </div>
     <% end %>
-
     <section class="grid grid-cols-3 gap-x-10">
       <div class="space-y-3">
         <h2 class="text-2xl text-indigo-600">Current Monthly Report</h2>

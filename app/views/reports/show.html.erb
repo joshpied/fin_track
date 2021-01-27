@@ -38,24 +38,24 @@
       </section>
     <% end %>
     <%# transaction categories %>
-    <section class="grid grid-cols-2 md:grid-cols-1">
-      <h2 class="text-2xl text-indigo-700 mb-4 col-span-2">Spending by Category</h2>
-      <% if @transaction_categories.length > 0 %>
-        <div class="col-span-2 lg:col-span-1">
+    <% if @transaction_categories.length > 0 %>
+      <section class="grid grid-cols-1 xl:grid-cols-2 gap-9 place-items-center">
+        <h2 class="text-2xl text-indigo-700 mb-4 col-span-2">Spending by Category</h2>
+        <div class="col-span-2 xl:col-span-1 xl:mr-24">
           <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false, colors: @transaction_category_colors %>
         </div>
-        <div class="col-span-2 lg:col-span-1">
-          <%= render partial: 'shared/category_spending_list', :locals => { :categories => @transaction_categories, :height => 26 } %>
+        <div class="col-span-2 xl:col-span-1 w-full">
+          <%= render partial: 'shared/category_spending_list', :locals => { :categories => @transaction_categories, :height => 26 }%>
         </div>
-      <% else %>
-        <div class="text-center">
-          <h1 class="text-2xl">No Spending yet!</h1>
-          <h2 class="text-xl text-gray-500">Start by adding transactions.</h2>
-        </div>
-      <% end %>
-    </section>
+      </section>
+    <% else %>
+      <div class="text-center pt-12">
+        <h3 class="text-2xl text-indigo-500">No Spending yet!</h3>
+        <h4 class="text-xl text-gray-500">Start by adding transactions.</h4>
+      </div>
+    <% end %>
     <%# transaction list %>
-    <section class="transactions-list flex flex-col space-y-5 mt-7">
+    <section class="transactions-list flex flex-col space-y-9 place-items-center">
       <h2 class="text-2xl text-indigo-700">Transactions in <%= @report.month_name %></h2>
       <ul class="transactions flex flex-col justify-between space-y-6">
         <% @transactions.each do |transaction| %>

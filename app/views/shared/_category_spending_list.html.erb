@@ -2,7 +2,7 @@
 
 <%# set height of viewable list (16 rem is default) %>
 <div class="overflow-y-scroll" style="height: <%= height %>rem">
-  <ul class="flex flex-col space-y-3 px-12">
+  <ul class="flex flex-col space-y-3">
     <%# takes array of key-value pairs where: 0=category, 1=amount %>
     <% categories.each do |category, amount| %>
       <li class="flex flex-row justify-between items-center bg-white rounded-lg p-4">
