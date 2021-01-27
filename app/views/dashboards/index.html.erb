@@ -52,7 +52,8 @@
     <hr>
     <%# Bottom %>
     <div class="pb-10 px-10">
-      <%= link_to "Show Reports", reports_path, class: "link float-right" %>
+      <%= link_to "Full Report", report_path(@recent_report.id), class: "link float-right" %>
+      <%# <%= link_to "Show Reports", reports_path, class: "link float-right" %>
     </div>
   </section>
 </main>

@@ -41,6 +41,13 @@ class ReportsController < ApplicationController
       .reports
       .left_outer_joins(:budget)
       .find(report_id)
+
+    if @report.budget.present?
+      @spent_budget_difference = @report.budget.amount - @report.total_amount
+      @is_overbudget = @spent_budget_difference < 0 ? true : false
+    else
+      @is_overbudget = false
+    end
       
     @transactions_pagy,
     @transactions = 
@@ -103,7 +110,7 @@ class ReportsController < ApplicationController
       .sum(:amount)
       .sort_by { |category, amount| amount }
       .reverse  
-      
+
     @transaction_category_colors = []
     @transaction_categories.each do |category, _|
       @transaction_category_colors << helpers.transaction_category_color(category)

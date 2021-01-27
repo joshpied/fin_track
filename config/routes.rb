@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   # get "/dashboard", to: "dashboard#index", controller: 'dashboard'
-  resources :dashboards, only: [:index]
+  resources :dashboards, only: [:index], as: "dashboard"
 
   resources :transactions
 
