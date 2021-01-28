@@ -8,13 +8,16 @@
       </h2>
       <%= area_chart @area_chart_reports, prefix: "$", thousands: ",", colors: ["rgba(79, 70, 229, 0.7)"] %>
     </section>
+
     <% if @transaction_categories.length > 0 %>
-      <section class="grid grid-cols-1 xl:grid-cols-2 gap-9">
+      <section class="grid grid-cols-1 xl:grid-cols-2 gap-9 place-items-center">
         <h2 class="text-2xl text-indigo-700 mb-4 col-span-2">Spending by Category (<%= @current_year %>)</h2>
         <div class="col-span-2 xl:col-span-1 xl:mr-24">
           <%= pie_chart @transaction_categories, donut: true, prefix: "$", legend: false, colors: @transaction_category_colors %>
         </div>
-        <%= render partial: 'shared/category_spending_list', :locals => { :categories => @transaction_categories, :height => 26 }%>
+        <div class="col-span-2 xl:col-span-1 w-full">
+          <%= render partial: 'shared/category_spending_list', :locals => { :categories => @transaction_categories, :height => 26 }%>
+        </div>
       </section>
     <% else %>
       <div class="text-center pt-12">
@@ -22,6 +25,7 @@
         <h4 class="text-xl text-gray-500">Start by adding transactions.</h4>
       </div>
     <% end %>
+
     <section class="grid grid-cols-3 gap-x-10">
       <div class="space-y-3">
         <h2 class="text-2xl text-indigo-600">Current Monthly Report</h2>

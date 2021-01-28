@@ -1,13 +1,12 @@
-<div class="container-regular mt-6 mb-6">
+<div class="container-regular">
  
-  <%= link_to reports_path, class: "link text-2xl flex items-center mb-6" do %>
+  <%= link_to reports_path, class: "link text-2xl flex items-center mt-6 mb-6" do %>
     <i class="fas fa-angle-left mr-1"></i> Reports
   <% end %>
 
   <%= render partial: 'shared/page_header', :locals => {:title => "#{@report}", :icon => "fas fa-file-alt mr-1", :subtitle => "Report"} %>
- 
 
-  <main class="grid grid-cols-1 gap-12 mt-6">
+  <main class="grid grid-cols-1 gap-20 mt-6">
     <%# Three stats %>
     <section class="flex flex-row flex-wrap justify-between space-x-6">
       <div class="flex flex-col flex-1 border-r-2 border-gray-300 space-y-2 p-2">

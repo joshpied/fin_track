@@ -1,8 +1,13 @@
-<div class="container-large mb-6">
+<div class="container-regular">
+
+  <%= link_to reports_path, class: "link text-2xl flex items-center mt-6 mb-6" do %>
+    <i class="fas fa-angle-left mr-1"></i> Reports
+  <% end %>
+
   <%= render partial: 'shared/page_header', :locals => {:title => "Year Report", :icon => "fas fa-file-alt mr-1", :subtitle => @year} %>
     
   <main class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-    <h2 class="text-4xl col-span-2 justify-self-center mt-12">
+    <h2 class="text-4xl sm:text-5xl col-span-2 justify-self-center mt-12">
       <span class="text-indigo-600">
         <%= number_to_currency(@total_spent_year) %>
       </span>

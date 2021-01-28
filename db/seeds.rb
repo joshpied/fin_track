@@ -14,15 +14,17 @@ TransactionCategory.delete_all
 Transaction.delete_all
 
 puts "Creating User"
-user = User.create(email: "test@test.com", password: "testers")
+user = User.create(email: "test@test.com", password: "testers") # update to add username too -> class UsersController < Clearance::UsersController
 
 puts "Creating Reports"
 # setting reports to $0 because after_create, after_update, and after_destroy methods 
 # in transaction.rb model will take care of incrementing/decrementing report amounts
-#november
+# november 2020
 report1 = Report.create(total_amount: 0.00, report_date: "2020-11-01 00:00:00", month: 11, year: 2020, user_id: user.id)
-#december
+# december 2020
 report2 = Report.create(total_amount: 0.00, report_date: "2020-12-11 00:00:00", month: 12, year: 2020, user_id: user.id)
+# january 2021
+report3 = Report.create(total_amount: 0.00, report_date: "2021-01-02 00:00:00", month: 1, year: 2021, user_id: user.id)
 
 puts "Creating Budgets"
 # november budget
@@ -65,4 +67,14 @@ transaction3 = Transaction.create(note: "plane ticket", amount: 674.37, transact
 transaction4 = Transaction.create(note: "bought calculator", amount: 26.50, transaction_date: "2020-12-12 00:00:00", transaction_category_id: 2, user: user, report: report2)
 transaction5 = Transaction.create(note: "bus ticket", amount: 3.60, transaction_date: "2020-12-13 00:00:00", transaction_category_id: 3, user: user, report: report2)
 transaction6 = Transaction.create(note: "peace lily", amount: 18.34, transaction_date: "2020-12-15 00:00:00", transaction_category_id: 4, user: user, report: report2)
+# january
+transaction7 = Transaction.create(note: "toothbrush", amount: 505.55, transaction_date: "2021-01-02 00:00:00", transaction_category_id: 11, user: user, report: report3)
+transaction8 = Transaction.create(note: "new windshield", amount: 71.22, transaction_date: "2021-01-03 00:00:00", transaction_category_id: 8, user: user, report: report3)
+transaction9 = Transaction.create(note: "chickens", amount: 44.64, transaction_date: "2021-01-04 00:00:00", transaction_category_id: 14, user: user, report: report3)
+transaction10 = Transaction.create(note: "misc items", amount: 1500.87, transaction_date: "2021-01-05 00:00:00", transaction_category_id: 18, user: user, report: report3)
+transaction11 = Transaction.create(note: "plane tickets", amount: 880.64, transaction_date: "2021-01-06 00:00:00", transaction_category_id: 1, user: user, report: report3)
+transaction12 = Transaction.create(note: "coca cola", amount: 5.56, transaction_date: "2021-01-07 00:00:00", transaction_category_id: 9, user: user, report: report3)
+transaction13 = Transaction.create(note: "film", amount: 347.25, transaction_date: "2021-01-08 00:00:00", transaction_category_id: 13, user: user, report: report3)
+transaction14 = Transaction.create(note: "massage", amount: 43.26, transaction_date: "2021-01-10 00:00:00", transaction_category_id: 7, user: user, report: report3)
+
 
