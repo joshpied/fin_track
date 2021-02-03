@@ -66,4 +66,8 @@ module ApplicationHelper
   def date_to_month_year(date)
     date.strftime("%B %Y")
   end
+
+  def number_to_month_name(number)
+    Date::MONTHNAMES[number]
+  end
 end

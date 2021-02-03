@@ -12,6 +12,8 @@ puts "Deleting the Data"
 User.delete_all
 TransactionCategory.delete_all
 Transaction.delete_all
+Budget.delete_all
+Report.delete_all
 
 puts "Creating User"
 user = User.create(email: "test@test.com", password: "testers") # update to add username too -> class UsersController < Clearance::UsersController
@@ -24,7 +26,7 @@ report1 = Report.create(total_amount: 0.00, report_date: "2020-11-01 00:00:00", 
 # december 2020
 report2 = Report.create(total_amount: 0.00, report_date: "2020-12-11 00:00:00", month: 12, year: 2020, user_id: user.id)
 # january 2021
-report3 = Report.create(total_amount: 0.00, report_date: "2021-01-02 00:00:00", month: 1, year: 2021, user_id: user.id)
+report3 = Report.create(total_amount: 0.00, report_date: "2021-01-01 00:00:00", month: 1, year: 2021, user_id: user.id)
 
 puts "Creating Budgets"
 # november budget
