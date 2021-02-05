@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
 
   def index
     @current_month_name = Time.new.strftime("%B")
+    # todo: max jsut most recent transactions regardless of report
     @transactions = 
       current_user
       .transactions
@@ -24,10 +25,12 @@ class TransactionsController < ApplicationController
   ##
   # Creates a new transaction and creates/updates a report if it is the first transaction of the month
   def create
-    # need to check if report for this month/year exists yet and create it if not
+
+    # need to check if report for selected month/year exists yet and create it if not
+    transaction_date = Time.parse(transaction_params[:transaction_date])
     report = current_user
             .reports
-            .find_or_create_by(:month => @@current_month, :year => @@current_year) do |report|
+            .find_or_create_by(:month => transaction_date.month, :year => transaction_date.year) do |report|
               report.total_amount = 0.00
               report.report_date = transaction_params[:transaction_date]
             end
