@@ -1,4 +1,4 @@
-<main class="2xl:mx-96 xl:mx-72 lg:mx-36  m-3 my-6">
+<main class="2xl:mx-96 xl:mx-72 lg:mx-36 m-3 my-6">
   <h1 class="text-indigo-600 text-4xl my-12">Signed in as, <%= current_user.email %></h1>
   
   <% if @recent_report.present? %>
@@ -37,7 +37,9 @@
           <h2 class="text-lg md:text-3xl text-gray-800 font-semibold"><%= number_to_currency(@recent_report.total_amount) %></h2>
         </div>
         <% if @recent_report.budget.blank? %>
-          <%= link_to '+ Budget for this month', new_budget_path, class: "hover:bg-gray-100 rounded-2xl p-2" %>
+          <div class="flex items-center">
+            <%= link_to '+ Budget for this month', new_budget_path, class: "link hover:bg-gray-100 rounded-2xl p-2" %>
+          </div>
         <% else %>
           <div class="flex flex-col flex-1 border-r-2 border-gray-300 space-y-2 p-2">
             <p class="text-base text-gray-500">Remaining</p>

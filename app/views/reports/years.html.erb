@@ -1,4 +1,8 @@
-<div class="container-regular space-y-6">
+<div class="container-regular mt-6 mb-6">
+  <%= link_to reports_path, class: "link text-2xl flex items-center mt-6 mb-6" do %>
+    <i class="fas fa-angle-left mr-1"></i> Back
+  <% end %>
+
   <%= render partial: 'shared/page_header', :locals => {:title => "Yearly Reports", :icon => "fas fa-clipboard-list mr-1", :subtitle => ""} %>
 
   <main class="grid grid-cols-1 md:grid-cols-2 gap-12">

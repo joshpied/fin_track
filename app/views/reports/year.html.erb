@@ -1,7 +1,6 @@
-<div class="container-regular">
-
-  <%= link_to reports_path, class: "link text-2xl flex items-center mt-6 mb-6" do %>
-    <i class="fas fa-angle-left mr-1"></i> Reports
+<div class="container-regular mt-6 mb-6">
+  <%= link_to 'javascript:history.back()', class: "link text-2xl flex items-center mt-6 mb-6" do %>
+    <i class="fas fa-angle-left mr-1"></i> Back
   <% end %>
 
   <%= render partial: 'shared/page_header', :locals => {:title => "Year Report", :icon => "fas fa-file-alt mr-1", :subtitle => @year} %>

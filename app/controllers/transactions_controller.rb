@@ -25,7 +25,6 @@ class TransactionsController < ApplicationController
   ##
   # Creates a new transaction and creates/updates a report if it is the first transaction of the month
   def create
-
     # need to check if report for selected month/year exists yet and create it if not
     transaction_date = Time.parse(transaction_params[:transaction_date])
     report = current_user

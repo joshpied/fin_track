@@ -14,7 +14,10 @@
         <h2 class="text-lg md:text-3xl text-gray-800 font-semibold"><%= number_to_currency(@report.total_amount) %></h2>
       </div>
       <% if @report.budget.blank? %>
-        <%= link_to '+ Budget for this month', new_budget_path, class: "hover:bg-gray-100 rounded-2xl p-2" %>
+        <%# Can only set budget for the current month/year in dashboard %>
+        <div class="flex items-center flex-1">
+          <p class="text-gray-600">No Budget Set!</p>
+        </div>
       <% else %>
         <div class="flex flex-col flex-1 border-r-2 border-gray-300 space-y-2 p-2">
           <p class="text-base text-gray-500">Remaining</p>

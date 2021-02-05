@@ -1,4 +1,10 @@
-<h1 class="text-center text-4xl text-indigo-600 my-6">New Transaction</h1>
-<div class="container-narrow-form">
+<div class="container-regular">
+  <%= link_to transactions_path, class: "link text-2xl flex items-center mt-6" do %>
+    <i class="fas fa-angle-left mr-1"></i> Transactions
+  <% end %>
+</div>
+<%# container-narrow-form  %>
+<div class="container-narrow-form shadow-md rounded-lg bg-white p-6">
+  <h1 class="text-center text-4xl text-indigo-600 my-6">New Transaction</h1>
   <%= render partial: "form" %>
 </div>
